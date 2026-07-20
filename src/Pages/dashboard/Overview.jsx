@@ -1,65 +1,94 @@
-const mockEnquiries = [
-  { id: 1, name: 'Rahul Sharma', email: 'rahul@example.com', phone: '9876543210', course: 'B.E CSE', date: '2026-07-10' },
-  { id: 2, name: 'Priya Patel', email: 'priya@example.com', phone: '9876543211', course: 'B.Tech AI', date: '2026-07-12' },
-  { id: 3, name: 'Amit Kumar', email: 'amit@example.com', phone: '9876543212', course: 'MBA', date: '2026-07-13' },
-];
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const StatCard = ({ label, value, color, icon }) => (
+  <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center gap-4">
+    <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl ${color}`}>
+      {icon}
+    </div>
+    <div>
+      <p className="text-sm text-slate-500 font-medium">{label}</p>
+      <p className="text-3xl font-bold text-slate-800 mt-0.5">{value}</p>
+    </div>
+  </div>
+);
 
 const Overview = () => {
-  const totalEnquiries = mockEnquiries.length;
-  const totalCourses = 8;
-  const totalStudents = 500;
+  const [enquiries, setEnquiries] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const [enqRes, usrRes] = await Promise.all([
+          axios.get('http://localhost:5000/api/contact'),
+          axios.get('http://localhost:5000/api/users'),
+        ]);
+        if (enqRes.data.success) setEnquiries(enqRes.data.data);
+        if (usrRes.data.success) setUsers(usrRes.data.data);
+      } catch {
+        // backend may not be running; silently use defaults
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, []);
+
+  const recent = enquiries.slice(-5).reverse();
 
   return (
-    <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-          <p className="text-sm text-slate-500">Total Enquiries</p>
-          <p className="text-2xl font-bold text-indigo-900">{totalEnquiries}</p>
-        </div>
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-          <p className="text-sm text-slate-500">Total Courses</p>
-          <p className="text-2xl font-bold text-green-600">{totalCourses}</p>
-        </div>
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-          <p className="text-sm text-slate-500">Admissions (2026)</p>
-          <p className="text-2xl font-bold text-amber-600">120</p>
-        </div>
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-          <p className="text-sm text-slate-500">Students Placed (2025)</p>
-          <p className="text-2xl font-bold text-emerald-600">{totalStudents}</p>
-        </div>
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-2xl font-bold text-slate-800">Overview</h2>
+        <p className="text-slate-500 text-sm mt-1">Welcome back! Here's a summary of your college portal.</p>
       </div>
 
-      <div className="mt-8 bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-200">
-          <h2 className="font-bold text-indigo-900">Recent Enquiries</h2>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-slate-200">
-            <thead className="bg-slate-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">Name</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">Email</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">Phone</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">Course</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">Date</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-200">
-              {mockEnquiries.map((enq) => (
-                <tr key={enq.id} className="hover:bg-slate-50">
-                  <td className="px-6 py-4 text-sm font-medium text-slate-900">{enq.name}</td>
-                  <td className="px-6 py-4 text-sm text-slate-600">{enq.email}</td>
-                  <td className="px-6 py-4 text-sm text-slate-600">{enq.phone}</td>
-                  <td className="px-6 py-4 text-sm text-slate-600">{enq.course}</td>
-                  <td className="px-6 py-4 text-sm text-slate-600">{enq.date}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      {/* Stat cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <StatCard label="Total Enquiries" value={enquiries.length} icon="📩" color="bg-indigo-50" />
+        <StatCard label="Total Users" value={users.length} icon="👤" color="bg-blue-50" />
+        <StatCard label="Admissions 2026" value={120} icon="🎓" color="bg-amber-50" />
+        <StatCard label="Placed (2025)" value={465} icon="💼" color="bg-emerald-50" />
       </div>
-    </>
+
+      {/* Recent enquiries */}
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+        <div className="px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+          <h3 className="font-bold text-slate-800">Recent Enquiries</h3>
+          <span className="text-xs text-slate-400">{enquiries.length} total</span>
+        </div>
+        {loading ? (
+          <div className="p-8 text-center text-slate-400">Loading...</div>
+        ) : recent.length === 0 ? (
+          <div className="p-8 text-center text-slate-400">No enquiries yet. They will appear here once submitted via the Contact page.</div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-slate-200 text-sm">
+              <thead className="bg-slate-50">
+                <tr>
+                  {['Name','Email','Phone','Course','Date'].map(h => (
+                    <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {recent.map((e) => (
+                  <tr key={e._id} className="hover:bg-slate-50">
+                    <td className="px-4 py-3 font-medium text-slate-900">{e.fullName}</td>
+                    <td className="px-4 py-3 text-slate-600">{e.email}</td>
+                    <td className="px-4 py-3 text-slate-600">{e.phone}</td>
+                    <td className="px-4 py-3 text-slate-600">{e.course}</td>
+                    <td className="px-4 py-3 text-slate-500 text-xs">{new Date(e.createdAt).toLocaleDateString('en-IN')}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 

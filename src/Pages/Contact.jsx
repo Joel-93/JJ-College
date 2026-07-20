@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -88,16 +89,31 @@ const Contact = () => {
     setErrors(newErrors);
 
     if (isValid) {
-      alert('✅ Your enquiry has been submitted successfully! We will contact you soon.');
-      // Reset form
-      setFormData({
-        fullName: '',
-        email: '',
-        phone: '',
-        city: '',
-        course: '',
-        message: ''
-      });
+      axios
+        .post("http://localhost:5000/api/contact", {
+          fullName,
+          email,
+          phone,
+          city,
+          course,
+          message,
+        })
+        .then(() => {
+          alert('✅ Your enquiry has been submitted successfully! We will contact you soon.');
+          // Reset form
+          setFormData({
+            fullName: '',
+            email: '',
+            phone: '',
+            city: '',
+            course: '',
+            message: ''
+          });
+        })
+        .catch((error) => {
+          console.error("Error submitting contact form:", error);
+          alert("❌ Failed to submit enquiry. Please try again.");
+        });
     } else {
       // Scroll to first error
       const firstError = document.querySelector('.text-red-500');
