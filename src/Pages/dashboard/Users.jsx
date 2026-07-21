@@ -17,7 +17,7 @@ const Users = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/users');
+      const res = await axios.get('https://jj-college-5poa.onrender.com/api/users');
       if (res.data.success) setUsers(res.data.data);
     } catch (err) {
       console.error('Failed to load users', err);
@@ -35,7 +35,7 @@ const Users = () => {
     setSaving(true);
     setError('');
     try {
-      await axios.post('http://localhost:5000/api/users', {
+      await axios.post('https://jj-college-5poa.onrender.com/api/users', {
         username: form.name,
         email: form.email,
         password: form.password,
@@ -53,7 +53,7 @@ const Users = () => {
   const deleteUser = async (id) => {
     if (!window.confirm('Delete this user? This cannot be undone.')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/users/${id}`);
+      await axios.delete(`https://jj-college-5poa.onrender.com/api/users${id}`);
       setUsers((prev) => prev.filter((u) => u._id !== id));
     } catch {
       alert('Failed to delete user');

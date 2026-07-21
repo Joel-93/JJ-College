@@ -22,8 +22,8 @@ const Overview = () => {
     const load = async () => {
       try {
         const [enqRes, usrRes] = await Promise.all([
-          axios.get('http://localhost:5000/api/contact'),
-          axios.get('http://localhost:5000/api/users'),
+          axios.get('https://jj-college-5poa.onrender.com/api/contact'),
+          axios.get('https://jj-college-5poa.onrender.com/api/users'),
         ]);
         if (enqRes.data.success) setEnquiries(enqRes.data.data);
         if (usrRes.data.success) setUsers(usrRes.data.data);

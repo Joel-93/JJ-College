@@ -90,7 +90,7 @@ const Contact = () => {
 
     if (isValid) {
       axios
-        .post("http://localhost:5000/api/contact", {
+        .post("https://jj-college-5poa.onrender.com/api/contact", {
           fullName,
           email,
           phone,

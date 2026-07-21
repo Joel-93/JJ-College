@@ -9,8 +9,17 @@ const app = express();
 
 connectDB();
 
-app.use(cors());
-app.use(express.json());
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://YOUR-VERCEL-APP.vercel.app",
+    ],
+    credentials: true,
+  })
+);app.use(express.json());
 
 const authRoutes = require("./routes/authRoutes");
 const contactRoutes = require("./routes/contactRoutes");

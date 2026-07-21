@@ -12,7 +12,7 @@ const Enquiries = () => {
 
   const fetchEnquiries = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/contact');
+      const res = await axios.get('https://jj-college-5poa.onrender.com/api/contact');
       if (res.data.success) setEnquiries(res.data.data);
     } catch (err) {
       console.error('Failed to load enquiries', err);
@@ -24,7 +24,7 @@ const Enquiries = () => {
   const deleteEnquiry = async (id) => {
     if (!window.confirm('Delete this enquiry?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/contact/${id}`);
+      await axios.delete(`https://jj-college-5poa.onrender.com/api/contact/${id}`);
       setEnquiries((prev) => prev.filter((e) => e._id !== id));
     } catch {
       alert('Failed to delete enquiry');
