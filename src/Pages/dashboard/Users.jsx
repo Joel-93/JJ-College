@@ -102,7 +102,7 @@ const Users = () => {
                     </td>
                     <td className="px-5 py-3 text-slate-600">{u.email}</td>
                     <td className="px-5 py-3">
-                      <span className={`px-2 py-0.5 rounded-full text-xs font-semibold capitalize ${u.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-sky-100 text-sky-800'}`}>
+                      <span className={`px-2 py-0.5 rounded-full text-xs font-semibold capitalize ${u.role === 'admin' ? 'bg-purple-100 text-purple-800' : u.role === 'faculty' ? 'bg-emerald-100 text-emerald-800' : 'bg-sky-100 text-sky-800'}`}>
                         {u.role}
                       </span>
                     </td>
@@ -144,6 +144,7 @@ const Users = () => {
                 <label className="block text-sm font-semibold text-slate-700 mb-1">Role</label>
                 <select className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })}>
                   <option value="student">Student</option>
+                  <option value="faculty">Faculty</option>
                   <option value="admin">Admin</option>
                 </select>
               </div>

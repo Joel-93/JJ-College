@@ -30,6 +30,10 @@ exports.createUser = async (req, res) => {
       });
     }
 
+    if (!['admin', 'student', 'faculty'].includes(role)) {
+      return res.status(400).json({ success: false, message: "Invalid role" });
+    }
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({

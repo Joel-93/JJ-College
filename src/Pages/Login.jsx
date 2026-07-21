@@ -3,12 +3,39 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 
 const Login = () => {
+  const [role, setRole] = useState('admin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
+
+  const roleConfig = {
+    admin: {
+      label: '🏛️ Admin',
+      color: 'from-indigo-950 via-indigo-900 to-slate-900',
+      accent: 'text-amber-400',
+      badge: 'bg-amber-400 text-indigo-900',
+      hint: 'admin@gmail.com / admin@123',
+    },
+    faculty: {
+      label: '👨‍🏫 Faculty',
+      color: 'from-emerald-950 via-emerald-900 to-slate-900',
+      accent: 'text-emerald-400',
+      badge: 'bg-emerald-400 text-emerald-900',
+      hint: 'faculty@gmail.com / faculty@123',
+    },
+    student: {
+      label: '🎓 Student',
+      color: 'from-sky-950 via-sky-900 to-slate-900',
+      accent: 'text-sky-400',
+      badge: 'bg-sky-400 text-sky-900',
+      hint: 'student@gmail.com / student@123',
+    },
+  };
+
+  const cfg = roleConfig[role];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,36 +44,76 @@ const Login = () => {
     const res = await login(email, password);
     setLoading(false);
     if (res.success) {
-      navigate('/dashboard');
+      // Route based on role from server response
+      if (res.role === 'admin') navigate('/dashboard');
+      else if (res.role === 'faculty') navigate('/faculty');
+      else navigate('/student');
     } else {
-      setError(res.message || 'Invalid email or password');
+      setError(res.message || 'Invalid credentials');
     }
   };
 
   return (
-    <div className="min-h-[calc(100vh-130px)] flex items-center justify-center bg-gradient-to-br from-indigo-950 via-indigo-900 to-slate-900 px-4 py-12">
+    <div className={`min-h-[calc(100vh-130px)] flex items-center justify-center bg-gradient-to-br ${cfg.color} px-4 py-12 transition-all duration-500`}>
       <div className="w-full max-w-md">
+        {/* Logo */}
         <div className="text-center mb-8">
-          <div className="w-14 h-14 bg-amber-400 rounded-2xl flex items-center justify-center font-black text-indigo-900 text-2xl mx-auto mb-4">
+          <div className="w-16 h-16 bg-amber-400 rounded-2xl flex items-center justify-center font-black text-indigo-900 text-2xl mx-auto mb-4 shadow-lg">
             JJ
           </div>
-          <h2 className="text-3xl font-extrabold text-white">Admin Login</h2>
-          <p className="text-indigo-300 text-sm mt-2">Sign in to access the college management portal</p>
+          <h2 className="text-3xl font-extrabold text-white">Welcome Back</h2>
+          <p className="text-slate-300 text-sm mt-2">Sign in to your JJ Engineering College portal</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-2xl p-8">
-          <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+          {/* Role Selector Tabs */}
+          <div className="grid grid-cols-3 border-b border-slate-200">
+            {Object.entries(roleConfig).map(([key, val]) => (
+              <button
+                key={key}
+                type="button"
+                onClick={() => { setRole(key); setError(''); setEmail(''); setPassword(''); }}
+                className={`py-3 text-sm font-semibold capitalize transition-all ${
+                  role === key
+                    ? 'bg-indigo-900 text-white border-b-2 border-amber-400'
+                    : 'text-slate-500 hover:bg-slate-50'
+                }`}
+              >
+                {val.label}
+              </button>
+            ))}
+          </div>
+
+          <form onSubmit={handleSubmit} className="p-8 space-y-5">
+            {/* Role display badge */}
+            <div className="flex items-center gap-2">
+              <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase ${cfg.badge}`}>
+                {role} Login
+              </span>
+            </div>
+
+            {/* Role Field (display only) */}
+            <div>
+              <label className="block text-sm font-semibold text-slate-700 mb-1">Login As</label>
+              <div className="w-full px-4 py-3 border border-slate-200 rounded-xl bg-slate-50 text-sm text-slate-600 capitalize font-medium">
+                {cfg.label}
+              </div>
+            </div>
+
+            {/* Email */}
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-1">Email Address</label>
               <input
                 type="email"
-                placeholder="Enter your email"
+                placeholder={`Enter your ${role} email`}
                 className="w-full px-4 py-3 border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
+
+            {/* Password */}
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-1">Password</label>
               <input
@@ -60,23 +127,28 @@ const Login = () => {
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-4 py-2.5">
-                ⚠ {error}
+              <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-4 py-2.5 flex items-center gap-2">
+                <span>⚠</span> {error}
               </div>
             )}
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-indigo-900 hover:bg-indigo-800 text-white font-bold py-3 rounded-xl transition disabled:opacity-60"
+              className="w-full bg-indigo-900 hover:bg-indigo-800 text-white font-bold py-3 rounded-xl transition disabled:opacity-60 text-sm"
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? 'Signing in...' : `Sign In as ${role.charAt(0).toUpperCase() + role.slice(1)}`}
             </button>
-          </form>
 
-          <div className="mt-6 pt-5 border-t border-slate-100 text-center">
-            <Link to="/" className="text-indigo-600 hover:underline text-sm">← Back to Website</Link>
-          </div>
+            {/* Demo credentials hint */}
+            <p className="text-center text-xs text-slate-400 border-t pt-4">
+              Demo: <span className="font-mono text-slate-500">{cfg.hint}</span>
+            </p>
+          </form>
+        </div>
+
+        <div className="text-center mt-4">
+          <Link to="/" className="text-slate-300 hover:text-white text-sm transition">← Back to Website</Link>
         </div>
       </div>
     </div>
