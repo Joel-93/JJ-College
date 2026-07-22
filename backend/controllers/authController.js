@@ -6,23 +6,28 @@ const validator = require("validator");
 // Register
 exports.register = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, username, email, password, role } = req.body;
 
-    if (!name || !email || !password) {
+    if (!name || (!username && !email) || !password) {
       return res.status(400).json({
         success: false,
-        message: "All fields are required",
+        message: "Name, username/email, and password are required",
       });
     }
 
-    if (!validator.isEmail(email)) {
+    if (email && !validator.isEmail(email)) {
       return res.status(400).json({
         success: false,
         message: "Invalid email",
       });
     }
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ 
+      $or: [
+        { email: email || 'never_match_this' }, 
+        { username: username || 'never_match_this' }
+      ] 
+    });
 
     if (existingUser) {
       return res.status(400).json({
@@ -35,6 +40,7 @@ exports.register = async (req, res) => {
 
     const user = await User.create({
       name,
+      username,
       email,
       password: hashedPassword,
       role: role || "student",
@@ -63,14 +69,16 @@ exports.register = async (req, res) => {
 // Login
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ 
+      $or: [{ username: username }, { email: username }] 
+    });
 
     if (!user) {
       return res.status(400).json({
         success: false,
-        message: "Invalid Email",
+        message: "Invalid Username or Email",
       });
     }
 

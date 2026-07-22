@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext.jsx';
 
 const Login = () => {
   const [role, setRole] = useState('admin');
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -17,21 +17,21 @@ const Login = () => {
       color: 'from-indigo-950 via-indigo-900 to-slate-900',
       accent: 'text-amber-400',
       badge: 'bg-amber-400 text-indigo-900',
-      hint: 'admin@gmail.com / admin@123',
+      hint: 'admin / admin@123',
     },
     faculty: {
       label: '👨‍🏫 Faculty',
       color: 'from-emerald-950 via-emerald-900 to-slate-900',
       accent: 'text-emerald-400',
       badge: 'bg-emerald-400 text-emerald-900',
-      hint: 'faculty@gmail.com / faculty@123',
+      hint: 'fac_cse01 / faculty@123',
     },
     student: {
       label: '🎓 Student',
       color: 'from-sky-950 via-sky-900 to-slate-900',
       accent: 'text-sky-400',
       badge: 'bg-sky-400 text-sky-900',
-      hint: 'student@gmail.com / student@123',
+      hint: '23ucs082 / student@123',
     },
   };
 
@@ -41,7 +41,7 @@ const Login = () => {
     e.preventDefault();
     setError('');
     setLoading(true);
-    const res = await login(email, password);
+    const res = await login(username, password);
     setLoading(false);
     if (res.success) {
       // Route based on role from server response
@@ -72,7 +72,7 @@ const Login = () => {
               <button
                 key={key}
                 type="button"
-                onClick={() => { setRole(key); setError(''); setEmail(''); setPassword(''); }}
+                onClick={() => { setRole(key); setError(''); setUsername(''); setPassword(''); }}
                 className={`py-3 text-sm font-semibold capitalize transition-all ${
                   role === key
                     ? 'bg-indigo-900 text-white border-b-2 border-amber-400'
@@ -100,15 +100,15 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Email */}
+            {/* Username */}
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-1">Email Address</label>
+              <label className="block text-sm font-semibold text-slate-700 mb-1">Username</label>
               <input
-                type="email"
-                placeholder={`Enter your ${role} email`}
+                type="text"
+                placeholder={`Enter your ${role} username`}
                 className="w-full px-4 py-3 border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
               />
             </div>

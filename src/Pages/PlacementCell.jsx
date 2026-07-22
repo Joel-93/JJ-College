@@ -1,26 +1,25 @@
 import { Link } from 'react-router-dom';
 import { FaBriefcase, FaChartLine, FaTrophy, FaUsers, FaBuilding, FaGraduationCap, FaHandshake } from 'react-icons/fa';
 
-// Real company logo colors/initials for authentic feel
 const RECRUITERS = [
-  { name: 'TCS', color: '#1e3a5f', bg: '#e8f0fe', abbr: 'TCS' },
-  { name: 'Infosys', color: '#007cc3', bg: '#e0f4ff', abbr: 'INFY' },
-  { name: 'Wipro', color: '#341f97', bg: '#f0ebff', abbr: 'WIPR' },
-  { name: 'Accenture', color: '#a100ff', bg: '#f5e8ff', abbr: 'ACC' },
-  { name: 'Cognizant', color: '#0033a0', bg: '#e5eeff', abbr: 'CTS' },
-  { name: 'Capgemini', color: '#003189', bg: '#e8f0ff', abbr: 'CAP' },
-  { name: 'Zoho', color: '#e42527', bg: '#ffebeb', abbr: 'ZOHO' },
-  { name: 'HCL Tech', color: '#00adef', bg: '#e0f7ff', abbr: 'HCL' },
-  { name: 'Tech Mahindra', color: '#c8102e', bg: '#ffe8eb', abbr: 'TM' },
-  { name: 'IBM', color: '#006699', bg: '#e0f0ff', abbr: 'IBM' },
-  { name: 'Amazon', color: '#ff9900', bg: '#fff5e0', abbr: 'AMZN' },
-  { name: 'Deloitte', color: '#86bc25', bg: '#f0f9e0', abbr: 'DEL' },
-  { name: 'Google', color: '#4285f4', bg: '#e8f0fe', abbr: 'GOOG' },
-  { name: 'Microsoft', color: '#00a4ef', bg: '#e0f4ff', abbr: 'MSFT' },
-  { name: 'Adobe', color: '#ff0000', bg: '#ffe0e0', abbr: 'ADBE' },
-  { name: 'Flipkart', color: '#2874f0', bg: '#e0ecff', abbr: 'FLIP' },
-  { name: 'PayPal', color: '#003087', bg: '#e0e8ff', abbr: 'PYPL' },
-  { name: 'VMware', color: '#607078', bg: '#f0f2f3', abbr: 'VMW' },
+  { name: 'TCS', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg' },
+  { name: 'Infosys', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg' },
+  { name: 'Wipro', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg' },
+  { name: 'Accenture', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg' },
+  { name: 'Cognizant', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/43/Cognizant_logo_2022.svg' },
+  { name: 'Capgemini', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Capgemini_201x_logo.svg' },
+  { name: 'Zoho', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Zoho_Logo.svg' },
+  { name: 'HCL Tech', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/HCL_Technologies_logo.svg' },
+  { name: 'Tech Mahindra', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f6/Tech_Mahindra_New_Logo.svg' },
+  { name: 'IBM', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg' },
+  { name: 'Amazon', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg' },
+  { name: 'Deloitte', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/56/Deloitte.svg' },
+  { name: 'Google', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg' },
+  { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg' },
+  { name: 'Adobe', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Adobe_Systems_logo_and_wordmark.svg' },
+  { name: 'Flipkart', logo: 'https://upload.wikimedia.org/wikipedia/en/7/7a/Flipkart_logo.svg' },
+  { name: 'PayPal', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg' },
+  { name: 'VMware', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Vmware.svg' },
 ];
 
 const PlacementCell = () => {
@@ -115,15 +114,13 @@ const PlacementCell = () => {
             {RECRUITERS.map((company) => (
               <div
                 key={company.name}
-                className="group flex flex-col items-center justify-center p-4 rounded-xl border-2 border-slate-100 hover:border-indigo-300 hover:shadow-md transition-all duration-200 cursor-default"
-                style={{ background: company.bg }}
+                className="group flex flex-col items-center justify-center p-4 rounded-xl border-2 border-slate-100 hover:border-indigo-300 hover:shadow-md transition-all duration-200 cursor-default bg-white"
               >
-                <div
-                  className="w-10 h-10 rounded-lg flex items-center justify-center font-black text-sm mb-2 group-hover:scale-110 transition-transform"
-                  style={{ background: company.color, color: '#fff' }}
-                >
-                  {company.abbr.slice(0, 3)}
-                </div>
+                <img 
+                  src={company.logo} 
+                  alt={`${company.name} logo`} 
+                  className="w-16 h-10 object-contain mb-2 group-hover:scale-110 transition-transform filter grayscale hover:grayscale-0"
+                />
                 <span className="text-xs font-semibold text-slate-700 text-center leading-tight">{company.name}</span>
               </div>
             ))}

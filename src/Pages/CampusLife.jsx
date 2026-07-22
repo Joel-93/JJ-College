@@ -30,7 +30,7 @@ const CampusLife = () => {
     {
       title: 'Main Building',
       subtitle: 'Iconic Architecture',
-      gradient: 'from-indigo-900 via-indigo-800 to-blue-900',
+      image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       icon: '🏛️',
       detail: 'Our 4-storey main building spans 2 lakh sq.ft with modern lecture halls, faculty offices, and administration.',
       tag: 'Infrastructure',
@@ -39,7 +39,7 @@ const CampusLife = () => {
     {
       title: 'Central Library',
       subtitle: 'Knowledge Hub',
-      gradient: 'from-amber-700 via-amber-800 to-yellow-900',
+      image: 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       icon: '📚',
       detail: 'Home to 50,000+ books, 200+ journals, and a digital resource center with 24/7 access for students.',
       tag: 'Academics',
@@ -48,7 +48,7 @@ const CampusLife = () => {
     {
       title: 'Cricket Ground',
       subtitle: 'Champions Arena',
-      gradient: 'from-emerald-800 via-green-800 to-teal-900',
+      image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       icon: '🏏',
       detail: 'Full-size cricket ground with turf wicket, practice nets, and stands for 500 spectators.',
       tag: 'Sports',
@@ -57,7 +57,7 @@ const CampusLife = () => {
     {
       title: 'AI & ML Lab',
       subtitle: 'Research Excellence',
-      gradient: 'from-purple-900 via-purple-800 to-violet-900',
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       icon: '🤖',
       detail: 'Equipped with GPU workstations, cloud computing access, and tools for deep learning research.',
       tag: 'Technology',
@@ -66,7 +66,7 @@ const CampusLife = () => {
     {
       title: 'Student Cafeteria',
       subtitle: 'Culinary Delight',
-      gradient: 'from-orange-700 via-red-800 to-rose-900',
+      image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       icon: '🍽️',
       detail: 'Serves 1,500+ meals daily with North Indian, South Indian, Chinese, and continental options.',
       tag: 'Dining',
@@ -75,7 +75,7 @@ const CampusLife = () => {
     {
       title: 'Grand Auditorium',
       subtitle: 'Cultural Heart',
-      gradient: 'from-slate-800 via-slate-700 to-zinc-900',
+      image: 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       icon: '🎭',
       detail: '1,000-seat AC auditorium with professional sound & lighting, used for cultural fests and convocations.',
       tag: 'Events',
@@ -84,7 +84,7 @@ const CampusLife = () => {
     {
       title: 'Boys Hostel Block',
       subtitle: 'Home Away from Home',
-      gradient: 'from-blue-800 via-blue-900 to-cyan-900',
+      image: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       icon: '🏠',
       detail: '5-storey hostel with 500+ rooms, common room, TV lounge, and 24-hour hot water supply.',
       tag: 'Accommodation',
@@ -93,7 +93,7 @@ const CampusLife = () => {
     {
       title: 'Basketball Court',
       subtitle: 'Sporting Excellence',
-      gradient: 'from-rose-700 via-red-800 to-pink-900',
+      image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       icon: '🏀',
       detail: 'Regulation NBA-size indoor court with professional flooring, bleachers, and scoreboards.',
       tag: 'Sports',
@@ -232,15 +232,14 @@ const CampusLife = () => {
               style={{ minHeight: '220px' }}
               onClick={() => setActiveGallery(activeGallery === index ? null : index)}
             >
-              {/* Gradient background simulating photo */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient}`}></div>
-
-              {/* Decorative pattern overlay */}
-              <div className="absolute inset-0 opacity-10"
-                style={{
-                  backgroundImage: 'radial-gradient(circle at 20% 30%, rgba(255,255,255,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(255,255,255,0.2) 0%, transparent 40%)'
-                }}
+              {/* Image background */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{ backgroundImage: `url(${item.image})` }}
               ></div>
+
+              {/* Dark overlay to make text readable */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10"></div>
 
               {/* Main icon */}
               <div className="absolute inset-0 flex items-center justify-center">

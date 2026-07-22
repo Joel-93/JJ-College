@@ -8,10 +8,18 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
 
+    username: {
+      type: String,
+      unique: true,
+      sparse: true, // Allows null/undefined if admin still uses email
+      lowercase: true,
+      trim: true,
+    },
+
     email: {
       type: String,
-      required: [true, "Email is required"],
       unique: true,
+      sparse: true,
       lowercase: true,
       trim: true,
     },

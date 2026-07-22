@@ -1,34 +1,60 @@
 import { useAuth } from '../../context/AuthContext.jsx';
+import { useState, useEffect } from 'react';
+import { getStudentDashboard } from '../../services/dataService.js';
 
 const StudentOverview = () => {
   const { user } = useAuth();
   const firstName = user?.name?.split(' ')[0] || 'Student';
 
+  const [dashboardData, setDashboardData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDashboard = async () => {
+      try {
+        const res = await getStudentDashboard();
+        if (res.success) {
+          setDashboardData(res.data);
+        }
+      } catch (err) {
+        console.error("Error fetching dashboard", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDashboard();
+  }, []);
+
+  if (loading) return <div className="p-8 text-center text-sky-600">Loading Dashboard...</div>;
+
+  const dbData = dashboardData || {};
+
   const stats = [
-    { label: 'Enrolled Courses', value: '6', icon: '📚', color: 'from-sky-400 to-cyan-400', bg: 'bg-sky-50' },
-    { label: 'Attendance', value: '87%', icon: '📋', color: 'from-emerald-400 to-green-400', bg: 'bg-emerald-50' },
-    { label: 'CGPA', value: '8.4', icon: '🏆', color: 'from-amber-400 to-yellow-400', bg: 'bg-amber-50' },
+    { label: 'Enrolled Courses', value: dbData.courses?.length || 0, icon: '📚', color: 'from-sky-400 to-cyan-400', bg: 'bg-sky-50' },
+    { label: 'Attendance', value: `${dbData.overallAttendance || 0}%`, icon: '📋', color: 'from-emerald-400 to-green-400', bg: 'bg-emerald-50' },
+    { label: 'CGPA', value: dbData.cgpa || '0.0', icon: '🏆', color: 'from-amber-400 to-yellow-400', bg: 'bg-amber-50' },
     { label: 'Pending Fees', value: '₹0', icon: '💳', color: 'from-violet-400 to-purple-400', bg: 'bg-violet-50' },
   ];
 
-  const upcomingClasses = [
-    { time: '09:00 AM', subject: 'Data Structures & Algorithms', room: 'Room 301', faculty: 'Dr. S. Meena' },
-    { time: '10:30 AM', subject: 'Database Management Systems', room: 'Lab 204', faculty: 'Dr. R. Karthik' },
-    { time: '01:00 PM', subject: 'Computer Networks', room: 'Room 405', faculty: 'Prof. A. Kumar' },
-    { time: '03:00 PM', subject: 'Operating Systems', room: 'Room 302', faculty: 'Dr. P. Vani' },
-  ];
+  // Map schedule for today (assuming Monday for demo if not found)
+  const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+  const todaysScheduleRaw = dbData.schedule ? (dbData.schedule[today] || dbData.schedule['Monday'] || []) : [];
+  
+  // Create dummy objects for the timeline since we only stored strings in backend map
+  const upcomingClasses = todaysScheduleRaw.map((subject, idx) => ({
+    time: ['09:00 AM', '10:30 AM', '01:00 PM', '03:00 PM'][idx % 4],
+    subject: subject,
+    room: ['Room 301', 'Lab 204', 'Room 405', 'Room 302'][idx % 4],
+    faculty: 'Assigned Faculty'
+  }));
 
   const announcements = [
     { title: 'Internal Exam Schedule Released', date: 'Jul 25, 2026', type: 'Exam', color: 'bg-red-100 text-red-700' },
     { title: 'Hackathon Registration Open', date: 'Jul 22, 2026', type: 'Event', color: 'bg-sky-100 text-sky-700' },
-    { title: 'Library hours extended till 10PM', date: 'Jul 20, 2026', type: 'Notice', color: 'bg-amber-100 text-amber-700' },
-    { title: 'Placement Training - Batch 3', date: 'Jul 28, 2026', type: 'Training', color: 'bg-emerald-100 text-emerald-700' },
   ];
 
   const assignments = [
     { subject: 'Data Structures', title: 'Binary Tree Implementation', due: 'Jul 24', status: 'Pending', statusColor: 'bg-amber-100 text-amber-700' },
-    { subject: 'DBMS', title: 'ER Diagram for Library System', due: 'Jul 22', status: 'Submitted', statusColor: 'bg-emerald-100 text-emerald-700' },
-    { subject: 'Networks', title: 'TCP/IP Protocol Analysis', due: 'Jul 26', status: 'Pending', statusColor: 'bg-amber-100 text-amber-700' },
   ];
 
   return (
@@ -42,9 +68,9 @@ const StudentOverview = () => {
           <h2 className="text-2xl sm:text-3xl font-bold mt-1">{firstName}!</h2>
           <p className="text-sky-100 text-sm mt-2 max-w-md">You have 4 classes today and 2 pending assignments. Keep up the good work!</p>
           <div className="flex gap-3 mt-4">
-            <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold">B.E CSE — 3rd Year</span>
-            <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold">Section A</span>
-            <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold hidden sm:inline">Roll: CSE2024042</span>
+            <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold">{dbData.department || 'B.E CSE'} — {dbData.year || '1st Year'}</span>
+            <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold">Section {dbData.section || 'A'}</span>
+            <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold hidden sm:inline">Roll: {dbData.rollNo || 'N/A'}</span>
           </div>
         </div>
       </div>
