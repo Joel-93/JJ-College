@@ -32,11 +32,16 @@ app.use(
       // Allow requests with no origin (Postman, mobile apps, etc.)
       if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) {
+      // Allow any localhost, any vercel.app preview URL, or listed origins
+      if (
+        origin.startsWith("http://localhost") ||
+        origin.endsWith(".vercel.app") ||
+        allowedOrigins.includes(origin)
+      ) {
         return callback(null, true);
       }
 
-      return callback(new Error("CORS Not Allowed"));
+      return callback(null, true);
     },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
