@@ -1,23 +1,23 @@
 import { Link } from 'react-router-dom';
-import { FaBriefcase, FaChartLine, FaTrophy, FaUsers, FaBuilding, FaGraduationCap, FaHandshake } from 'react-icons/fa';
+import { FaBriefcase, FaChartLine, FaTrophy, FaUsers, FaBuilding, FaGraduationCap, FaHandshake, FaMoneyBillWave, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
 
 const RECRUITERS = [
-  { name: 'TCS', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg' },
+  { name: 'TCS', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/TATA_Consultancy_Services_Logo.svg' },
   { name: 'Infosys', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg' },
   { name: 'Wipro', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg' },
   { name: 'Accenture', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg' },
   { name: 'Cognizant', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/43/Cognizant_logo_2022.svg' },
   { name: 'Capgemini', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Capgemini_201x_logo.svg' },
-  { name: 'Zoho', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Zoho_Logo.svg' },
-  { name: 'HCL Tech', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/HCL_Technologies_logo.svg' },
-  { name: 'Tech Mahindra', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f6/Tech_Mahindra_New_Logo.svg' },
+  { name: 'Zoho', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/c1/Zoho_Logo.svg' },
+  { name: 'HCL Tech', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/82/HCLTech.svg' },
+  { name: 'Tech Mahindra', logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d4/Tech_Mahindra_Logo.svg' },
   { name: 'IBM', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg' },
   { name: 'Amazon', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg' },
-  { name: 'Deloitte', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/56/Deloitte.svg' },
+  { name: 'Deloitte', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/c7/Logo_of_Deloitte.svg' },
   { name: 'Google', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg' },
   { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg' },
   { name: 'Adobe', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Adobe_Systems_logo_and_wordmark.svg' },
-  { name: 'Flipkart', logo: 'https://upload.wikimedia.org/wikipedia/en/7/7a/Flipkart_logo.svg' },
+  { name: 'Flipkart', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Flipkart_logo.png' },
   { name: 'PayPal', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg' },
   { name: 'VMware', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Vmware.svg' },
 ];
@@ -68,18 +68,18 @@ const PlacementCell = () => {
       <section className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center p-6 bg-indigo-50 rounded-xl">
-              <div className="text-4xl mb-2">🏆</div>
+            <div className="text-center p-6 bg-indigo-50 rounded-xl flex flex-col items-center justify-center">
+              <FaTrophy className="text-amber-500 text-4xl mb-2" />
               <p className="text-3xl font-bold text-indigo-900">85%+</p>
               <p className="text-sm text-slate-600">Placement Rate</p>
             </div>
-            <div className="text-center p-6 bg-indigo-50 rounded-xl">
-              <div className="text-4xl mb-2">💰</div>
+            <div className="text-center p-6 bg-indigo-50 rounded-xl flex flex-col items-center justify-center">
+              <FaMoneyBillWave className="text-emerald-600 text-4xl mb-2" />
               <p className="text-3xl font-bold text-emerald-600">18 LPA</p>
               <p className="text-sm text-slate-600">Highest Package (2025)</p>
             </div>
-            <div className="text-center p-6 bg-indigo-50 rounded-xl">
-              <div className="text-4xl mb-2">🏢</div>
+            <div className="text-center p-6 bg-indigo-50 rounded-xl flex flex-col items-center justify-center">
+              <FaBuilding className="text-indigo-905 text-4xl mb-2" />
               <p className="text-3xl font-bold text-indigo-900">100+</p>
               <p className="text-sm text-slate-600">Recruiting Companies</p>
             </div>
@@ -119,7 +119,7 @@ const PlacementCell = () => {
                 <img 
                   src={company.logo} 
                   alt={`${company.name} logo`} 
-                  className="w-16 h-10 object-contain mb-2 group-hover:scale-110 transition-transform filter grayscale hover:grayscale-0"
+                  className="w-16 h-10 object-contain mb-2 group-hover:scale-110 transition-transform"
                 />
                 <span className="text-xs font-semibold text-slate-700 text-center leading-tight">{company.name}</span>
               </div>
@@ -244,8 +244,8 @@ const PlacementCell = () => {
               <p className="text-indigo-100">Placement Officer</p>
             </div>
             <div>
-              <p className="text-indigo-100">📧 placement@jjec.edu.in</p>
-              <p className="text-indigo-100">📞 +91 9876543212</p>
+              <p className="text-indigo-100 flex items-center justify-center gap-2"><FaEnvelope /> placement@jjec.edu.in</p>
+              <p className="text-indigo-100 flex items-center justify-center gap-2 mt-1"><FaPhoneAlt /> +91 9876543212</p>
             </div>
           </div>
           <div className="mt-6 flex flex-wrap justify-center gap-4">

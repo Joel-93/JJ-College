@@ -13,21 +13,21 @@ const Login = () => {
 
   const roleConfig = {
     admin: {
-      label: '🏛️ Admin',
+      label: 'Admin',
       color: 'from-indigo-950 via-indigo-900 to-slate-900',
       accent: 'text-amber-400',
       badge: 'bg-amber-400 text-indigo-900',
       hint: 'admin / admin@123',
     },
     faculty: {
-      label: '👨‍🏫 Faculty',
+      label: 'Faculty',
       color: 'from-emerald-950 via-emerald-900 to-slate-900',
       accent: 'text-emerald-400',
       badge: 'bg-emerald-400 text-emerald-900',
       hint: 'fac_cse01 / faculty@123',
     },
     student: {
-      label: '🎓 Student',
+      label: 'Student',
       color: 'from-sky-950 via-sky-900 to-slate-900',
       accent: 'text-sky-400',
       badge: 'bg-sky-400 text-sky-900',
@@ -58,9 +58,7 @@ const Login = () => {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-amber-400 rounded-2xl flex items-center justify-center font-black text-indigo-900 text-2xl mx-auto mb-4 shadow-lg">
-            JJ
-          </div>
+          <img src="/college_logo.png" alt="JJ College Logo" className="w-16 h-16 object-contain mx-auto mb-4 rounded-2xl shadow-lg bg-indigo-950 p-2" />
           <h2 className="text-3xl font-extrabold text-white">Welcome Back</h2>
           <p className="text-slate-300 text-sm mt-2">Sign in to your JJ Engineering College portal</p>
         </div>
@@ -128,7 +126,7 @@ const Login = () => {
 
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-4 py-2.5 flex items-center gap-2">
-                <span>⚠</span> {error}
+                <span>Error:</span> {error}
               </div>
             )}
 

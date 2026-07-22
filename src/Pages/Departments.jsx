@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaUsers, FaFlask, FaChalkboardTeacher, FaMicroscope, FaChartLine, FaRocket } from 'react-icons/fa';
+import { FaUsers, FaFlask, FaChalkboardTeacher, FaMicroscope, FaChartLine, FaRocket, FaCode, FaGlobe, FaBrain, FaBroadcastTower, FaBolt, FaCog, FaBuilding, FaChartBar, FaTrophy, FaMicrophone, FaFutbol, FaVideo } from 'react-icons/fa';
 
 const Departments = () => {
   const departments = [
@@ -7,7 +7,7 @@ const Departments = () => {
       id: 1,
       name: 'Computer Science & Engineering',
       code: 'CSE',
-      icon: '💻',
+      icon: <FaCode className="text-indigo-900" />,
       description: 'Pioneering the future of computing with cutting-edge curriculum in AI, ML, Cloud Computing, and Cybersecurity.',
       hod: 'Dr. S. Meena, Ph.D.',
       labs: ['Programming Lab', 'AI & ML Lab', 'Database Lab', 'Cloud Computing Lab', 'Cyber Security Lab'],
@@ -18,7 +18,7 @@ const Departments = () => {
       id: 2,
       name: 'Information Technology',
       code: 'IT',
-      icon: '🌐',
+      icon: <FaGlobe className="text-indigo-900" />,
       description: 'Bridging technology and business with expertise in web development, networking, and data analytics.',
       hod: 'Dr. R. Karthik, Ph.D.',
       labs: ['Web Technology Lab', 'Networking Lab', 'Mobile App Development Lab', 'Data Analytics Lab'],
@@ -29,7 +29,7 @@ const Departments = () => {
       id: 3,
       name: 'Artificial Intelligence & Data Science',
       code: 'AI&DS',
-      icon: '🧠',
+      icon: <FaBrain className="text-indigo-900" />,
       description: 'Transforming data into intelligence with deep learning, NLP, computer vision, and big data technologies.',
       hod: 'Dr. P. Vani, Ph.D.',
       labs: ['Deep Learning Lab', 'Data Science Lab', 'NLP Lab', 'Computer Vision Lab'],
@@ -40,7 +40,7 @@ const Departments = () => {
       id: 4,
       name: 'Electronics & Communication Engineering',
       code: 'ECE',
-      icon: '📡',
+      icon: <FaBroadcastTower className="text-indigo-900" />,
       description: 'Innovating the world of communication with embedded systems, VLSI, signal processing, and IoT.',
       hod: 'Dr. M. Anand, Ph.D.',
       labs: ['Embedded Systems Lab', 'VLSI Lab', 'Communication Lab', 'Signal Processing Lab'],
@@ -51,7 +51,7 @@ const Departments = () => {
       id: 5,
       name: 'Electrical & Electronics Engineering',
       code: 'EEE',
-      icon: '⚡',
+      icon: <FaBolt className="text-amber-500" />,
       description: 'Powering the future with expertise in power systems, renewable energy, control systems, and automation.',
       hod: 'Dr. L. Priya, Ph.D.',
       labs: ['Power Systems Lab', 'Electrical Machines Lab', 'Control Systems Lab', 'Renewable Energy Lab'],
@@ -62,7 +62,7 @@ const Departments = () => {
       id: 6,
       name: 'Mechanical Engineering',
       code: 'ME',
-      icon: '⚙️',
+      icon: <FaCog className="text-slate-600 animate-spin-slow" />,
       description: 'Building the world with precision in design, manufacturing, thermal systems, and robotics.',
       hod: 'Dr. K. Rajan, Ph.D.',
       labs: ['CAD/CAM Lab', 'Manufacturing Lab', 'Thermal Engineering Lab', 'Robotics Lab'],
@@ -73,7 +73,7 @@ const Departments = () => {
       id: 7,
       name: 'Civil Engineering',
       code: 'CE',
-      icon: '🏗️',
+      icon: <FaBuilding className="text-indigo-900" />,
       description: 'Creating sustainable infrastructure with expertise in structural engineering, surveying, and construction.',
       hod: 'Dr. S. Nandini, Ph.D.',
       labs: ['Survey Lab', 'Structural Engineering Lab', 'Construction Materials Lab', 'Environmental Lab'],
@@ -84,7 +84,7 @@ const Departments = () => {
       id: 8,
       name: 'Master of Business Administration',
       code: 'MBA',
-      icon: '📊',
+      icon: <FaChartBar className="text-indigo-900" />,
       description: 'Developing future business leaders with strategic management, finance, marketing, and entrepreneurship.',
       hod: 'Dr. R. Venkat, Ph.D.',
       labs: ['Business Analytics Lab', 'Simulation Lab', 'Finance Lab'],
@@ -201,7 +201,7 @@ const Departments = () => {
             >
               <div className="p-6">
                 <div className="flex items-start justify-between mb-3">
-                  <div className="text-4xl">{dept.icon}</div>
+                <div className="text-4xl flex items-center justify-center h-12 w-12 bg-indigo-50 rounded-xl mb-1">{dept.icon}</div>
                   <span className="bg-indigo-100 text-indigo-800 text-xs font-bold px-2 py-1 rounded">
                     {dept.code}
                   </span>
@@ -313,20 +313,20 @@ const Departments = () => {
               Beyond academics, students engage in a vibrant ecosystem of technical and cultural activities.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <div className="bg-indigo-800/50 p-4 rounded-xl">
-                <div className="text-3xl mb-2">🏆</div>
+              <div className="bg-indigo-800/50 p-4 rounded-xl flex flex-col items-center justify-center">
+                <FaCode className="text-amber-400 text-3xl mb-2" />
                 <p className="text-sm font-medium">Hackathons</p>
               </div>
-              <div className="bg-indigo-800/50 p-4 rounded-xl">
-                <div className="text-3xl mb-2">🎤</div>
+              <div className="bg-indigo-800/50 p-4 rounded-xl flex flex-col items-center justify-center">
+                <FaMicrophone className="text-amber-400 text-3xl mb-2" />
                 <p className="text-sm font-medium">Symposiums</p>
               </div>
-              <div className="bg-indigo-800/50 p-4 rounded-xl">
-                <div className="text-3xl mb-2">⚽</div>
+              <div className="bg-indigo-800/50 p-4 rounded-xl flex flex-col items-center justify-center">
+                <FaFutbol className="text-amber-400 text-3xl mb-2" />
                 <p className="text-sm font-medium">Sports</p>
               </div>
-              <div className="bg-indigo-800/50 p-4 rounded-xl">
-                <div className="text-3xl mb-2">🎭</div>
+              <div className="bg-indigo-800/50 p-4 rounded-xl flex flex-col items-center justify-center">
+                <FaVideo className="text-amber-400 text-3xl mb-2" />
                 <p className="text-sm font-medium">Cultural Events</p>
               </div>
             </div>

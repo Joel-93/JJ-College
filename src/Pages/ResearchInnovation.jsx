@@ -63,18 +63,18 @@ const ResearchInnovation = () => {
       <section className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center p-6 bg-indigo-50 rounded-xl">
-              <div className="text-4xl mb-2">📄</div>
+            <div className="text-center p-6 bg-indigo-50 rounded-xl flex flex-col items-center justify-center">
+              <FaFileAlt className="text-indigo-900 text-4xl mb-2" />
               <p className="text-3xl font-bold text-indigo-900">50+</p>
               <p className="text-sm text-slate-600">Research Papers</p>
             </div>
-            <div className="text-center p-6 bg-indigo-50 rounded-xl">
-              <div className="text-4xl mb-2">🏛️</div>
+            <div className="text-center p-6 bg-indigo-50 rounded-xl flex flex-col items-center justify-center">
+              <FaUniversity className="text-indigo-900 text-4xl mb-2" />
               <p className="text-3xl font-bold text-indigo-900">4</p>
               <p className="text-sm text-slate-600">Research Centers</p>
             </div>
-            <div className="text-center p-6 bg-indigo-50 rounded-xl">
-              <div className="text-4xl mb-2">🤝</div>
+            <div className="text-center p-6 bg-indigo-50 rounded-xl flex flex-col items-center justify-center">
+              <FaHandshake className="text-indigo-900 text-4xl mb-2" />
               <p className="text-3xl font-bold text-indigo-900">9+</p>
               <p className="text-sm text-slate-600">Industry Partners</p>
             </div>

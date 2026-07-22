@@ -1,6 +1,62 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 
 const Home = () => {
+  const btnRef = useRef(null);
+  const zoneRef = useRef(null);
+
+  useEffect(() => {
+    const btn = btnRef.current;
+    const zone = zoneRef.current;
+    if (!btn || !zone) return;
+
+    const strength = 0.35;
+
+    // wiggle loop
+    const wiggle = gsap.to(btn, {
+      rotation: 8,
+      duration: 1.5,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+
+    // magnetic pull — overwrite: "auto" keeps the wiggle!
+    const onMouseMove = (e) => {
+      const rect = zone.getBoundingClientRect();
+      const x = gsap.utils.mapRange(rect.left, rect.right, -rect.width / 2, rect.width / 2, e.clientX);
+      const y = gsap.utils.mapRange(rect.top, rect.bottom, -rect.height / 2, rect.height / 2, e.clientY);
+
+      gsap.to(btn, {
+        x: x * strength,
+        y: y * strength,
+        duration: 0.4,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+    };
+
+    const onMouseLeave = () => {
+      gsap.to(btn, {
+        x: 0,
+        y: 0,
+        duration: 0.7,
+        ease: "elastic.out(1, 0.4)",
+        overwrite: "auto"
+      });
+    };
+
+    zone.addEventListener("mousemove", onMouseMove);
+    zone.addEventListener("mouseleave", onMouseLeave);
+
+    return () => {
+      zone.removeEventListener("mousemove", onMouseMove);
+      zone.removeEventListener("mouseleave", onMouseLeave);
+      wiggle.kill();
+    };
+  }, []);
+
   return (
     <>
       <section className="relative bg-slate-900 text-white overflow-hidden">
@@ -19,12 +75,15 @@ const Home = () => {
             Empowering Future Engineers with Quality Education, Innovation, and Excellence.
           </p>
           <div className="mt-8">
-            <Link
-              to="/admissions"
-              className="inline-block bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-6 py-3 rounded-lg shadow-lg transition transform hover:-translate-y-0.5"
-            >
-              Explore Admissions
-            </Link>
+            <div ref={zoneRef} className="inline-block p-10 cursor-pointer">
+              <Link
+                ref={btnRef}
+                to="/admissions"
+                className="inline-block bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-8 py-4 rounded-xl shadow-lg"
+              >
+                Explore Admissions
+              </Link>
+            </div>
           </div>
         </div>
       </section>

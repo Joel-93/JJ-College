@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaHome, FaBook, FaDumbbell, FaFlask, FaUtensils, FaVideo, FaBus, FaHeartbeat, FaUsers, FaCamera, FaExpand } from 'react-icons/fa';
+import { FaHome, FaBook, FaDumbbell, FaFlask, FaUtensils, FaVideo, FaBus, FaHeartbeat, FaUsers, FaCamera, FaExpand, FaCode, FaRobot, FaMusic, FaFutbol, FaHandshake, FaRocket, FaBuilding, FaGraduationCap, FaRunning } from 'react-icons/fa';
 import { useState } from 'react';
 
 const CampusLife = () => {
@@ -17,12 +17,12 @@ const CampusLife = () => {
   ];
 
   const clubs = [
-    { name: 'Coding Club', icon: '💻', desc: 'Competitive programming, hackathons, and tech workshops.' },
-    { name: 'Robotics Club', icon: '🤖', desc: 'Build robots, participate in national competitions.' },
-    { name: 'Music & Arts Club', icon: '🎵', desc: 'Music, dance, drama, and creative arts.' },
-    { name: 'Sports Club', icon: '⚽', desc: 'Organize tournaments and fitness activities.' },
-    { name: 'NSS', icon: '🤝', desc: 'Community service and social outreach programs.' },
-    { name: 'Entrepreneurship Cell', icon: '🚀', desc: 'Startup incubation, pitch competitions, and mentoring.' },
+    { name: 'Coding Club', icon: <FaCode />, desc: 'Competitive programming, hackathons, and tech workshops.' },
+    { name: 'Robotics Club', icon: <FaRobot />, desc: 'Build robots, participate in national competitions.' },
+    { name: 'Music & Arts Club', icon: <FaMusic />, desc: 'Music, dance, drama, and creative arts.' },
+    { name: 'Sports Club', icon: <FaFutbol />, desc: 'Organize tournaments and fitness activities.' },
+    { name: 'NSS', icon: <FaHandshake />, desc: 'Community service and social outreach programs.' },
+    { name: 'Entrepreneurship Cell', icon: <FaRocket />, desc: 'Startup incubation, pitch competitions, and mentoring.' },
   ];
 
   // Premium gallery using gradient cards with rich visual designs
@@ -31,7 +31,7 @@ const CampusLife = () => {
       title: 'Main Building',
       subtitle: 'Iconic Architecture',
       image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      icon: '🏛️',
+      icon: <FaBuilding />,
       detail: 'Our 4-storey main building spans 2 lakh sq.ft with modern lecture halls, faculty offices, and administration.',
       tag: 'Infrastructure',
       tagColor: 'bg-indigo-200 text-indigo-900',
@@ -40,7 +40,7 @@ const CampusLife = () => {
       title: 'Central Library',
       subtitle: 'Knowledge Hub',
       image: 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      icon: '📚',
+      icon: <FaBook />,
       detail: 'Home to 50,000+ books, 200+ journals, and a digital resource center with 24/7 access for students.',
       tag: 'Academics',
       tagColor: 'bg-amber-200 text-amber-900',
@@ -49,7 +49,7 @@ const CampusLife = () => {
       title: 'Cricket Ground',
       subtitle: 'Champions Arena',
       image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      icon: '🏏',
+      icon: <FaRunning />,
       detail: 'Full-size cricket ground with turf wicket, practice nets, and stands for 500 spectators.',
       tag: 'Sports',
       tagColor: 'bg-emerald-200 text-emerald-900',
@@ -58,7 +58,7 @@ const CampusLife = () => {
       title: 'AI & ML Lab',
       subtitle: 'Research Excellence',
       image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      icon: '🤖',
+      icon: <FaRobot />,
       detail: 'Equipped with GPU workstations, cloud computing access, and tools for deep learning research.',
       tag: 'Technology',
       tagColor: 'bg-purple-200 text-purple-900',
@@ -67,7 +67,7 @@ const CampusLife = () => {
       title: 'Student Cafeteria',
       subtitle: 'Culinary Delight',
       image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      icon: '🍽️',
+      icon: <FaUtensils />,
       detail: 'Serves 1,500+ meals daily with North Indian, South Indian, Chinese, and continental options.',
       tag: 'Dining',
       tagColor: 'bg-orange-200 text-orange-900',
@@ -76,7 +76,7 @@ const CampusLife = () => {
       title: 'Grand Auditorium',
       subtitle: 'Cultural Heart',
       image: 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      icon: '🎭',
+      icon: <FaVideo />,
       detail: '1,000-seat AC auditorium with professional sound & lighting, used for cultural fests and convocations.',
       tag: 'Events',
       tagColor: 'bg-slate-200 text-slate-900',
@@ -85,7 +85,7 @@ const CampusLife = () => {
       title: 'Boys Hostel Block',
       subtitle: 'Home Away from Home',
       image: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      icon: '🏠',
+      icon: <FaHome />,
       detail: '5-storey hostel with 500+ rooms, common room, TV lounge, and 24-hour hot water supply.',
       tag: 'Accommodation',
       tagColor: 'bg-blue-200 text-blue-900',
@@ -94,7 +94,7 @@ const CampusLife = () => {
       title: 'Basketball Court',
       subtitle: 'Sporting Excellence',
       image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      icon: '🏀',
+      icon: <FaDumbbell />,
       detail: 'Regulation NBA-size indoor court with professional flooring, bleachers, and scoreboards.',
       tag: 'Sports',
       tagColor: 'bg-rose-200 text-rose-900',
@@ -103,7 +103,7 @@ const CampusLife = () => {
       title: 'Convocation Hall',
       subtitle: 'Milestone Moments',
       gradient: 'from-yellow-700 via-amber-800 to-orange-900',
-      icon: '🎓',
+      icon: <FaGraduationCap />,
       detail: 'Annual convocation ceremonies hosted here with 2,000+ capacity for graduates and families.',
       tag: 'Ceremonial',
       tagColor: 'bg-yellow-200 text-yellow-900',
@@ -112,7 +112,7 @@ const CampusLife = () => {
       title: 'Innovation Hub',
       subtitle: 'Startup Incubator',
       gradient: 'from-teal-800 via-cyan-900 to-sky-900',
-      icon: '🚀',
+      icon: <FaRocket />,
       detail: 'Fully equipped co-working space with mentors, prototyping tools, and investor networking events.',
       tag: 'Innovation',
       tagColor: 'bg-teal-200 text-teal-900',
@@ -121,7 +121,7 @@ const CampusLife = () => {
       title: 'Medical Center',
       subtitle: '24/7 Healthcare',
       gradient: 'from-green-800 via-emerald-900 to-teal-900',
-      icon: '🏥',
+      icon: <FaHeartbeat />,
       detail: 'MBBS doctors on campus, emergency care, pharmacy, and ambulance service round the clock.',
       tag: 'Healthcare',
       tagColor: 'bg-green-200 text-green-900',
@@ -130,7 +130,7 @@ const CampusLife = () => {
       title: 'Annual Tech Fest',
       subtitle: 'TEKFUSION 2025',
       gradient: 'from-fuchsia-800 via-purple-900 to-indigo-900',
-      icon: '🎆',
+      icon: <FaCamera />,
       detail: '3-day mega tech festival with 5,000+ participants, hackathons, exhibitions, and guest speakers.',
       tag: 'Events',
       tagColor: 'bg-fuchsia-200 text-fuchsia-900',
@@ -209,7 +209,7 @@ const CampusLife = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {clubs.map((club, index) => (
               <div key={index} className="bg-white/10 backdrop-blur p-4 rounded-xl text-center hover:bg-white/20 transition cursor-default border border-white/10">
-                <div className="text-3xl mb-2">{club.icon}</div>
+              <div className="text-3xl mb-2 text-indigo-200 flex justify-center">{club.icon}</div>
                 <p className="text-sm font-semibold">{club.name}</p>
                 <p className="text-xs text-indigo-200 mt-1 leading-tight">{club.desc}</p>
               </div>
@@ -242,10 +242,8 @@ const CampusLife = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10"></div>
 
               {/* Main icon */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-7xl opacity-30 group-hover:opacity-50 group-hover:scale-110 transition-all duration-300 select-none">
-                  {item.icon}
-                </span>
+              <div className="absolute inset-0 flex items-center justify-center text-white/30 group-hover:text-white/50 group-hover:scale-110 transition-all duration-300 select-none text-7xl">
+                {item.icon}
               </div>
 
               {/* Tag */}
@@ -283,7 +281,7 @@ const CampusLife = () => {
       {/* Campus Tour CTA */}
       <section className="max-w-7xl mx-auto px-4 pb-12 sm:px-6 lg:px-8">
         <div className="bg-gradient-to-r from-indigo-900 to-indigo-800 text-white rounded-2xl p-8 md:p-12 text-center">
-          <div className="text-4xl mb-4">🎥</div>
+          <div className="flex justify-center text-amber-400 text-4xl mb-4"><FaVideo /></div>
           <h2 className="text-2xl font-bold text-amber-400 mb-4">Visit Our Campus</h2>
           <p className="text-indigo-100 max-w-2xl mx-auto mb-6">
             Schedule a campus tour and experience the JJ Engineering College community firsthand.

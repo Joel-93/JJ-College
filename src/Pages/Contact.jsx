@@ -99,7 +99,7 @@ const Contact = () => {
           message,
         })
         .then(() => {
-          alert('✅ Your enquiry has been submitted successfully! We will contact you soon.');
+          alert('Your enquiry has been submitted successfully! We will contact you soon.');
           // Reset form
           setFormData({
             fullName: '',
@@ -112,7 +112,7 @@ const Contact = () => {
         })
         .catch((error) => {
           console.error("Error submitting contact form:", error);
-          alert("❌ Failed to submit enquiry. Please try again.");
+          alert("Failed to submit enquiry. Please try again.");
         });
     } else {
       // Scroll to first error
