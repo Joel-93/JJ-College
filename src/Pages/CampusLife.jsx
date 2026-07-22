@@ -102,7 +102,7 @@ const CampusLife = () => {
     {
       title: 'Convocation Hall',
       subtitle: 'Milestone Moments',
-      gradient: 'from-yellow-700 via-amber-800 to-orange-900',
+      image: 'https://images.unsplash.com/photo-1523580494112-071dcb85170d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       icon: <FaGraduationCap />,
       detail: 'Annual convocation ceremonies hosted here with 2,000+ capacity for graduates and families.',
       tag: 'Ceremonial',
@@ -111,7 +111,7 @@ const CampusLife = () => {
     {
       title: 'Innovation Hub',
       subtitle: 'Startup Incubator',
-      gradient: 'from-teal-800 via-cyan-900 to-sky-900',
+      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       icon: <FaRocket />,
       detail: 'Fully equipped co-working space with mentors, prototyping tools, and investor networking events.',
       tag: 'Innovation',
@@ -120,7 +120,7 @@ const CampusLife = () => {
     {
       title: 'Medical Center',
       subtitle: '24/7 Healthcare',
-      gradient: 'from-green-800 via-emerald-900 to-teal-900',
+      image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       icon: <FaHeartbeat />,
       detail: 'MBBS doctors on campus, emergency care, pharmacy, and ambulance service round the clock.',
       tag: 'Healthcare',
@@ -129,7 +129,7 @@ const CampusLife = () => {
     {
       title: 'Annual Tech Fest',
       subtitle: 'TEKFUSION 2025',
-      gradient: 'from-fuchsia-800 via-purple-900 to-indigo-900',
+      image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       icon: <FaCamera />,
       detail: '3-day mega tech festival with 5,000+ participants, hackathons, exhibitions, and guest speakers.',
       tag: 'Events',

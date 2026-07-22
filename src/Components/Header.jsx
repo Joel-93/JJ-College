@@ -26,7 +26,7 @@ const Header = () => {
       </div>
 
       {/* Main header */}
-      <div className="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="w-full px-4 py-3 sm:px-8 lg:px-16 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
           <img src="/college_logo.png" alt="JJ College Logo" className="w-16 h-16 object-cover rounded-full shadow-md border-2 border-amber-400 bg-white" />
