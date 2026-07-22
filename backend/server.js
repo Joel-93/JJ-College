@@ -3,6 +3,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const path = require("path");
+const fs = require("fs");
 
 dotenv.config();
 
@@ -13,7 +14,11 @@ connectDB();
 
 // Middleware
 app.use(express.json());
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+const uploadDir = path.join(__dirname, "uploads");
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+app.use("/uploads", express.static(uploadDir));
 
 // CORS Configuration
 const allowedOrigins = [
