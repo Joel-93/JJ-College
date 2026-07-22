@@ -20,11 +20,6 @@ const Header = () => {
 
   return (
     <header className="bg-indigo-900 text-white shadow-md sticky top-0 z-50">
-      {/* Top bar */}
-      <div className="bg-indigo-950 text-indigo-200 text-xs text-center py-1 border-b border-indigo-800">
-        Affiliated to Anna University | Approved by AICTE | Accredited Institution
-      </div>
-
       {/* Main header */}
       <div className="w-full px-4 py-3 sm:px-8 lg:px-16 flex items-center justify-between">
         {/* Logo */}
@@ -75,7 +70,7 @@ const Header = () => {
               to="/login"
               className="px-3 py-2 rounded-md text-sm font-medium bg-amber-400 text-indigo-900 hover:bg-amber-300 transition font-bold"
             >
-              Admin Login
+              Login
             </Link>
           )}
         </nav>
@@ -142,7 +137,7 @@ const Header = () => {
               onClick={() => setMobileOpen(false)}
               className="block px-3 py-2 rounded-md text-sm bg-amber-400 text-indigo-900 font-bold"
             >
-              Admin Login
+              Login
             </Link>
           )}
         </nav>
