@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 
 const Login = () => {
+  const [role, setRole] = useState('student');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -37,6 +38,20 @@ const Login = () => {
 
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
           <form onSubmit={handleSubmit} className="p-8 space-y-5">
+            {/* Select Role */}
+            <div>
+              <label className="block text-sm font-semibold text-slate-700 mb-1">Select Role</label>
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="w-full px-4 py-3 border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition font-medium text-slate-700"
+              >
+                <option value="student">Student</option>
+                <option value="faculty">Faculty</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+
             {/* Username / Email */}
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-1">Username or Email</label>

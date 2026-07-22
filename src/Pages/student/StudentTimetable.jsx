@@ -1,3 +1,5 @@
+import { FaUtensils } from 'react-icons/fa';
+
 const StudentTimetable = () => {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   const timeSlots = ['09:00 - 10:00', '10:00 - 11:00', '11:15 - 12:15', '12:15 - 01:15', '02:00 - 03:00', '03:00 - 04:00'];
@@ -39,7 +41,7 @@ const StudentTimetable = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full">
       <div>
         <h2 className="text-2xl font-bold text-slate-800">Weekly Timetable</h2>
         <p className="text-slate-500 text-sm mt-0.5">Semester 5 — B.E Computer Science Engineering</p>
@@ -86,7 +88,7 @@ const StudentTimetable = () => {
 
       {/* Break info */}
       <div className="flex items-center gap-3 text-sm text-slate-500 bg-amber-50 border border-amber-100 rounded-xl px-5 py-3">
-        <span className="text-lg">☕</span>
+        <FaUtensils className="text-amber-600 text-base" />
         <span><strong className="text-amber-700">Lunch Break:</strong> 01:15 PM — 02:00 PM (45 minutes)</span>
       </div>
     </div>

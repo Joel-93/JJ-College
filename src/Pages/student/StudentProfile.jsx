@@ -1,4 +1,5 @@
 import { useAuth } from '../../context/AuthContext.jsx';
+import { FaGraduationCap, FaUser, FaMapMarkerAlt } from 'react-icons/fa';
 
 const StudentProfile = () => {
   const { user } = useAuth();
@@ -24,7 +25,7 @@ const StudentProfile = () => {
   const initials = profile.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
 
   return (
-    <div className="space-y-6 max-w-4xl">
+    <div className="space-y-6 w-full">
       <div>
         <h2 className="text-2xl font-bold text-slate-800">My Profile</h2>
         <p className="text-slate-500 text-sm mt-0.5">Your personal and academic information</p>
@@ -54,7 +55,9 @@ const StudentProfile = () => {
         {/* Academic Info */}
         <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
           <div className="px-6 py-4 border-b border-slate-100 bg-sky-50">
-            <h3 className="font-bold text-sky-800 flex items-center gap-2">🎓 Academic Information</h3>
+            <h3 className="font-bold text-sky-800 flex items-center gap-2">
+              <FaGraduationCap className="text-sky-600 text-lg" /> Academic Information
+            </h3>
           </div>
           <div className="p-6 space-y-4">
             {[
@@ -76,7 +79,9 @@ const StudentProfile = () => {
         {/* Personal Info */}
         <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
           <div className="px-6 py-4 border-b border-slate-100 bg-emerald-50">
-            <h3 className="font-bold text-emerald-800 flex items-center gap-2">👤 Personal Information</h3>
+            <h3 className="font-bold text-emerald-800 flex items-center gap-2">
+              <FaUser className="text-emerald-600 text-base" /> Personal Information
+            </h3>
           </div>
           <div className="p-6 space-y-4">
             {[
@@ -98,7 +103,9 @@ const StudentProfile = () => {
 
       {/* Address */}
       <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
-        <h3 className="font-bold text-slate-700 mb-2 text-sm">📍 Address</h3>
+        <h3 className="font-bold text-slate-700 mb-2 text-sm flex items-center gap-2">
+          <FaMapMarkerAlt className="text-red-500" /> Address
+        </h3>
         <p className="text-slate-600 text-sm">{profile.address}</p>
       </div>
     </div>

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FaEnvelope, FaUser, FaGraduationCap, FaBriefcase } from 'react-icons/fa';
 
-const StatCard = ({ label, value, color, icon }) => (
+const StatCard = ({ label, value, color, Icon }) => (
   <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center gap-4">
-    <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl ${color}`}>
-      {icon}
+    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${color}`}>
+      <Icon className="text-2xl" />
     </div>
     <div>
       <p className="text-sm text-slate-500 font-medium">{label}</p>
@@ -39,7 +40,7 @@ const Overview = () => {
   const recent = enquiries.slice(-5).reverse();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full">
       <div>
         <h2 className="text-2xl font-bold text-slate-800">Overview</h2>
         <p className="text-slate-500 text-sm mt-1">Welcome back! Here's a summary of your college portal.</p>
@@ -47,10 +48,10 @@ const Overview = () => {
 
       {/* Stat cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <StatCard label="Total Enquiries" value={enquiries.length} icon="📩" color="bg-indigo-50" />
-        <StatCard label="Total Users" value={users.length} icon="👤" color="bg-blue-50" />
-        <StatCard label="Admissions 2026" value={120} icon="🎓" color="bg-amber-50" />
-        <StatCard label="Placed (2025)" value={465} icon="💼" color="bg-emerald-50" />
+        <StatCard label="Total Enquiries" value={enquiries.length} Icon={FaEnvelope} color="bg-indigo-50 text-indigo-600" />
+        <StatCard label="Total Users" value={users.length} Icon={FaUser} color="bg-blue-50 text-blue-600" />
+        <StatCard label="Admissions 2026" value={120} Icon={FaGraduationCap} color="bg-amber-50 text-amber-600" />
+        <StatCard label="Placed (2025)" value={465} Icon={FaBriefcase} color="bg-emerald-50 text-emerald-600" />
       </div>
 
       {/* Recent enquiries */}

@@ -1,6 +1,15 @@
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useState, useEffect } from 'react';
 import { getStudentDashboard } from '../../services/dataService.js';
+import {
+  FaBook,
+  FaClipboardList,
+  FaTrophy,
+  FaCreditCard,
+  FaCalendarAlt,
+  FaBullhorn,
+  FaEdit
+} from 'react-icons/fa';
 
 const StudentOverview = () => {
   const { user } = useAuth();
@@ -30,17 +39,15 @@ const StudentOverview = () => {
   const dbData = dashboardData || {};
 
   const stats = [
-    { label: 'Enrolled Courses', value: dbData.courses?.length || 0, icon: '📚', color: 'from-sky-400 to-cyan-400', bg: 'bg-sky-50' },
-    { label: 'Attendance', value: `${dbData.overallAttendance || 0}%`, icon: '📋', color: 'from-emerald-400 to-green-400', bg: 'bg-emerald-50' },
-    { label: 'CGPA', value: dbData.cgpa || '0.0', icon: '🏆', color: 'from-amber-400 to-yellow-400', bg: 'bg-amber-50' },
-    { label: 'Pending Fees', value: '₹0', icon: '💳', color: 'from-violet-400 to-purple-400', bg: 'bg-violet-50' },
+    { label: 'Enrolled Courses', value: dbData.courses?.length || 0, icon: FaBook, color: 'from-sky-400 to-cyan-400', bg: 'bg-sky-50', accent: 'text-sky-600' },
+    { label: 'Attendance', value: `${dbData.overallAttendance || 0}%`, icon: FaClipboardList, color: 'from-emerald-400 to-green-400', bg: 'bg-emerald-50', accent: 'text-emerald-600' },
+    { label: 'CGPA', value: dbData.cgpa || '0.0', icon: FaTrophy, color: 'from-amber-400 to-yellow-400', bg: 'bg-amber-50', accent: 'text-amber-600' },
+    { label: 'Pending Fees', value: '₹0', icon: FaCreditCard, color: 'from-violet-400 to-purple-400', bg: 'bg-violet-50', accent: 'text-violet-600' },
   ];
 
-  // Map schedule for today (assuming Monday for demo if not found)
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
   const todaysScheduleRaw = dbData.schedule ? (dbData.schedule[today] || dbData.schedule['Monday'] || []) : [];
   
-  // Create dummy objects for the timeline since we only stored strings in backend map
   const upcomingClasses = todaysScheduleRaw.map((subject, idx) => ({
     time: ['09:00 AM', '10:30 AM', '01:00 PM', '03:00 PM'][idx % 4],
     subject: subject,
@@ -58,16 +65,16 @@ const StudentOverview = () => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full">
       {/* Welcome Banner */}
       <div className="bg-gradient-to-r from-sky-600 via-sky-500 to-cyan-500 rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-10 translate-x-10"></div>
         <div className="absolute bottom-0 left-1/2 w-24 h-24 bg-white/5 rounded-full translate-y-8"></div>
         <div className="relative z-10">
-          <p className="text-sky-100 text-sm font-medium">Good Morning 👋</p>
+          <p className="text-sky-100 text-sm font-medium">Good Morning</p>
           <h2 className="text-2xl sm:text-3xl font-bold mt-1">{firstName}!</h2>
           <p className="text-sky-100 text-sm mt-2 max-w-md">You have 4 classes today and 2 pending assignments. Keep up the good work!</p>
-          <div className="flex gap-3 mt-4">
+          <div className="flex flex-wrap gap-3 mt-4">
             <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold">{dbData.department || 'B.E CSE'} — {dbData.year || '1st Year'}</span>
             <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold">Section {dbData.section || 'A'}</span>
             <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold hidden sm:inline">Roll: {dbData.rollNo || 'N/A'}</span>
@@ -77,23 +84,28 @@ const StudentOverview = () => {
 
       {/* Stat Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map((s) => (
-          <div key={s.label} className={`${s.bg} rounded-2xl p-5 border border-slate-100 hover:shadow-md transition`}>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-2xl">{s.icon}</span>
-              <div className={`w-8 h-8 bg-gradient-to-br ${s.color} rounded-lg opacity-30`}></div>
+        {stats.map((s) => {
+          const Icon = s.icon;
+          return (
+            <div key={s.label} className={`${s.bg} rounded-2xl p-5 border border-slate-100 hover:shadow-md transition`}>
+              <div className="flex items-center justify-between mb-3">
+                <Icon className={`text-2xl ${s.accent}`} />
+                <div className={`w-8 h-8 bg-gradient-to-br ${s.color} rounded-lg opacity-30`}></div>
+              </div>
+              <p className="text-2xl font-bold text-slate-800">{s.value}</p>
+              <p className="text-xs text-slate-500 font-medium mt-0.5">{s.label}</p>
             </div>
-            <p className="text-2xl font-bold text-slate-800">{s.value}</p>
-            <p className="text-xs text-slate-500 font-medium mt-0.5">{s.label}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Today's Schedule */}
         <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
           <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center">
-            <h3 className="font-bold text-slate-800 flex items-center gap-2">📅 Today's Classes</h3>
+            <h3 className="font-bold text-slate-800 flex items-center gap-2">
+              <FaCalendarAlt className="text-sky-600" /> Today's Classes
+            </h3>
             <span className="text-xs text-sky-600 font-semibold">Monday, Jul 21</span>
           </div>
           <div className="divide-y divide-slate-50">
@@ -116,7 +128,9 @@ const StudentOverview = () => {
         {/* Announcements */}
         <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
           <div className="px-6 py-4 border-b border-slate-100">
-            <h3 className="font-bold text-slate-800 flex items-center gap-2">📢 Announcements</h3>
+            <h3 className="font-bold text-slate-800 flex items-center gap-2">
+              <FaBullhorn className="text-amber-500" /> Announcements
+            </h3>
           </div>
           <div className="divide-y divide-slate-50">
             {announcements.map((a, i) => (
@@ -137,7 +151,9 @@ const StudentOverview = () => {
       {/* Pending Assignments */}
       <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
         <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center">
-          <h3 className="font-bold text-slate-800 flex items-center gap-2">📝 Assignments</h3>
+          <h3 className="font-bold text-slate-800 flex items-center gap-2">
+            <FaEdit className="text-emerald-600" /> Assignments
+          </h3>
           <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-semibold">2 Pending</span>
         </div>
         <div className="overflow-x-auto">

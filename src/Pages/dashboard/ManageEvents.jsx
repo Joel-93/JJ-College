@@ -125,8 +125,8 @@ const ManageEvents = () => {
         {loading ? (
           <div className="p-10 text-center text-slate-400">Loading...</div>
         ) : filtered.length === 0 ? (
-          <div className="p-10 text-center text-slate-400">
-            <p className="text-4xl mb-3">📅</p>
+          <div className="p-10 text-center text-slate-400 flex flex-col items-center">
+            <FaCalendarAlt className="text-4xl mb-3 text-slate-300" />
             <p className="font-medium">No events found</p>
             <p className="text-sm mt-1">Click "Add Event" to create the first event.</p>
           </div>
