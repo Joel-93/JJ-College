@@ -2,22 +2,22 @@ import { Link } from 'react-router-dom';
 import { FaBriefcase, FaChartLine, FaTrophy, FaUsers, FaBuilding, FaGraduationCap, FaHandshake, FaMoneyBillWave, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
 
 const RECRUITERS = [
-  { name: 'TCS', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/TATA_Consultancy_Services_Logo.svg' },
+  { name: 'TCS', logo: '/tcs.jpg' },
   { name: 'Infosys', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg' },
   { name: 'Wipro', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg' },
   { name: 'Accenture', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg' },
   { name: 'Cognizant', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/43/Cognizant_logo_2022.svg' },
   { name: 'Capgemini', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Capgemini_201x_logo.svg' },
-  { name: 'Zoho', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/c1/Zoho_Logo.svg' },
-  { name: 'HCL Tech', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/82/HCLTech.svg' },
-  { name: 'Tech Mahindra', logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d4/Tech_Mahindra_Logo.svg' },
+  { name: 'Zoho', logo: '/zoho.jpg' },
+  { name: 'HCL Tech', logo: '/hcl.png' },
+  { name: 'Tech Mahindra', logo: '/tech_mahindra.png' },
   { name: 'IBM', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg' },
   { name: 'Amazon', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg' },
   { name: 'Deloitte', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/c7/Logo_of_Deloitte.svg' },
   { name: 'Google', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg' },
   { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg' },
   { name: 'Adobe', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Adobe_Systems_logo_and_wordmark.svg' },
-  { name: 'Flipkart', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Flipkart_logo.png' },
+  { name: 'Flipkart', logo: '/flipkart.jpg' },
   { name: 'PayPal', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg' },
   { name: 'VMware', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Vmware.svg' },
 ];

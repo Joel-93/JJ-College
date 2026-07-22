@@ -241,10 +241,6 @@ const CampusLife = () => {
               {/* Dark overlay to make text readable */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10"></div>
 
-              {/* Main icon */}
-              <div className="absolute inset-0 flex items-center justify-center text-white/30 group-hover:text-white/50 group-hover:scale-110 transition-all duration-300 select-none text-7xl">
-                {item.icon}
-              </div>
 
               {/* Tag */}
               <div className="absolute top-3 left-3 z-10">

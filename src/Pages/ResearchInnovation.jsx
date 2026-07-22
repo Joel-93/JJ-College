@@ -37,8 +37,12 @@ const ResearchInnovation = () => {
   ];
 
   const industryPartners = [
-    'TCS Research', 'IBM Research', 'Microsoft Research', 'Google Research',
-    'Intel', 'Samsung', 'Bosch', 'Tata Elxsi', 'L&T Technology Services'
+    { name: 'TCS Research', logo: '/tcs.jpg' },
+    { name: 'Tech Mahindra', logo: '/tech_mahindra.png' },
+    { name: 'HCL Tech', logo: '/hcl.png' },
+    { name: 'Zoho', logo: '/zoho.jpg' },
+    { name: 'Flipkart', logo: '/flipkart.jpg' },
+    { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg' },
   ];
 
   return (
@@ -234,10 +238,10 @@ const ResearchInnovation = () => {
             {industryPartners.map((partner, index) => (
               <div
                 key={index}
-                className="bg-slate-50 p-3 rounded-lg border border-slate-200 text-center hover:border-indigo-300 transition"
+                className="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-center justify-center hover:border-indigo-300 hover:shadow-md transition cursor-default"
               >
-                <FaHandshake className="text-indigo-600 mx-auto mb-1" />
-                <span className="text-xs font-medium text-slate-700">{partner}</span>
+                <img src={partner.logo} alt={partner.name} className="w-16 h-10 object-contain mb-2" />
+                <span className="text-xs font-semibold text-slate-700 text-center leading-tight">{partner.name}</span>
               </div>
             ))}
           </div>
