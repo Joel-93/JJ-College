@@ -29,7 +29,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
-          <img src="/college_logo.png" alt="JJ College Logo" className="w-10 h-10 object-contain rounded-lg bg-indigo-950 p-1" />
+          <img src="/college_logo.png" alt="JJ College Logo" className="w-16 h-16 object-cover rounded-full shadow-md border-2 border-amber-400 bg-white" />
           <div className="hidden sm:block">
             <h1 className="text-xl font-extrabold tracking-tight text-amber-400">
               JJ ENGINEERING COLLEGE

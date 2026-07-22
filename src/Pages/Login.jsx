@@ -58,7 +58,7 @@ const Login = () => {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <img src="/college_logo.png" alt="JJ College Logo" className="w-16 h-16 object-contain mx-auto mb-4 rounded-2xl shadow-lg bg-indigo-950 p-2" />
+          <img src="/college_logo.png" alt="JJ College Logo" className="w-24 h-24 object-cover mx-auto mb-4 rounded-full shadow-lg border-4 border-amber-400 bg-white" />
           <h2 className="text-3xl font-extrabold text-white">Welcome Back</h2>
           <p className="text-slate-300 text-sm mt-2">Sign in to your JJ Engineering College portal</p>
         </div>
