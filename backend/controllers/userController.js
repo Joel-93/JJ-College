@@ -21,12 +21,12 @@ exports.getAllUsers = async (req, res) => {
 // Create a user
 exports.createUser = async (req, res) => {
   try {
-    const { username, email, password, role } = req.body;
+    const { name, username, email, password, role } = req.body;
 
-    if (!username || !email || !password) {
+    if (!name || (!username && !email) || !password) {
       return res.status(400).json({
         success: false,
-        message: "Username, email, and password are required",
+        message: "Name, username/email, and password are required",
       });
     }
 
@@ -34,18 +34,24 @@ exports.createUser = async (req, res) => {
       return res.status(400).json({ success: false, message: "Invalid role" });
     }
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ 
+      $or: [
+        { email: email || 'never_match_this' }, 
+        { username: username || 'never_match_this' }
+      ] 
+    });
     if (existingUser) {
       return res.status(400).json({
         success: false,
-        message: "Email already exists",
+        message: "Username or Email already exists",
       });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({
-      name: username, // Map frontend username to backend name
+      name,
+      username,
       email,
       password: hashedPassword,
       role: role || "student",

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const EMPTY_FORM = { name: '', email: '', password: '', role: 'student' };
+const EMPTY_FORM = { name: '', username: '', email: '', password: '', role: 'student' };
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -29,14 +29,15 @@ const Users = () => {
   const openAdd = () => { setForm(EMPTY_FORM); setError(''); setShowModal(true); };
 
   const handleSave = async () => {
-    if (!form.name.trim() || !form.email.trim() || !form.password.trim()) {
-      return setError('Name, email and password are required.');
+    if (!form.name.trim() || !form.username.trim() || !form.email.trim() || !form.password.trim()) {
+      return setError('Name, Username, Email, and password are required.');
     }
     setSaving(true);
     setError('');
     try {
       await axios.post('https://jj-college-5poa.onrender.com/api/users', {
-        username: form.name,
+        name: form.name,
+        username: form.username,
         email: form.email,
         password: form.password,
         role: form.role,
@@ -53,7 +54,7 @@ const Users = () => {
   const deleteUser = async (id) => {
     if (!window.confirm('Delete this user? This cannot be undone.')) return;
     try {
-      await axios.delete(`https://jj-college-5poa.onrender.com/api/users${id}`);
+      await axios.delete(`https://jj-college-5poa.onrender.com/api/users/${id}`);
       setUsers((prev) => prev.filter((u) => u._id !== id));
     } catch {
       alert('Failed to delete user');
@@ -86,7 +87,7 @@ const Users = () => {
             <table className="min-w-full divide-y divide-slate-200 text-sm">
               <thead className="bg-slate-50">
                 <tr>
-                  {['Name', 'Email', 'Role', 'Created', 'Actions'].map((h) => (
+                  {['Name', 'Username', 'Email', 'Role', 'Created', 'Actions'].map((h) => (
                     <th key={h} className="px-5 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">{h}</th>
                   ))}
                 </tr>
@@ -100,6 +101,7 @@ const Users = () => {
                       </div>
                       {u.name}
                     </td>
+                    <td className="px-5 py-3 text-slate-600 font-mono text-xs">{u.username || '—'}</td>
                     <td className="px-5 py-3 text-slate-600">{u.email}</td>
                     <td className="px-5 py-3">
                       <span className={`px-2 py-0.5 rounded-full text-xs font-semibold capitalize ${u.role === 'admin' ? 'bg-purple-100 text-purple-800' : u.role === 'faculty' ? 'bg-emerald-100 text-emerald-800' : 'bg-sky-100 text-sky-800'}`}>
@@ -131,6 +133,10 @@ const Users = () => {
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1">Full Name *</label>
                 <input className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="e.g. Ravi Kumar" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Username *</label>
+                <input className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" value={form.username} onChange={(e) => setForm({ ...form, username: e.target.value })} placeholder="e.g. 23ucs082" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1">Email Address *</label>
