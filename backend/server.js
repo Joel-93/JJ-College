@@ -43,12 +43,18 @@ const contactRoutes = require("./routes/contactRoutes");
 const userRoutes = require("./routes/userRoutes");
 const studentRoutes = require("./routes/studentRoutes");
 const facultyRoutes = require("./routes/facultyRoutes");
+const newsRoutes = require("./routes/newsRoutes");
+const eventRoutes = require("./routes/eventRoutes");
+const galleryRoutes = require("./routes/galleryRoutes");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/student", studentRoutes);
 app.use("/api/faculty", facultyRoutes);
+app.use("/api/news", newsRoutes);
+app.use("/api/events", eventRoutes);
+app.use("/api/gallery", galleryRoutes);
 
 // Health Check Route
 app.get("/", (req, res) => {

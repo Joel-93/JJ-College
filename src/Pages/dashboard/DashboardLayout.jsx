@@ -8,6 +8,9 @@ const navItems = [
   { path: '/dashboard/courses', label: 'Courses', icon: '📚' },
   { path: '/dashboard/admissions', label: 'Admissions', icon: '🎓' },
   { path: '/dashboard/users', label: 'Users', icon: '👤' },
+  { path: '/dashboard/news', label: 'Manage News', icon: '📰' },
+  { path: '/dashboard/events', label: 'Manage Events', icon: '📅' },
+  { path: '/dashboard/gallery', label: 'Manage Gallery', icon: '🖼️' },
 ];
 
 const DashboardLayout = () => {

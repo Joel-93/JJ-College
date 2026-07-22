@@ -14,6 +14,9 @@ import Departments from "../Pages/Departments";
 import PlacementCell from "../Pages/PlacementCell";
 import CampusLife from "../Pages/CampusLife";
 import ResearchInnovation from "../Pages/ResearchInnovation";
+import News from "../Pages/News";
+import Events from "../Pages/Events";
+import Gallery from "../Pages/Gallery";
 
 // Dashboard Layout + sub-pages
 import DashboardLayout from "../Pages/dashboard/DashboardLayout";
@@ -22,6 +25,9 @@ import Enquiries      from "../Pages/dashboard/Enquiries";
 import DashCourses    from "../Pages/dashboard/Courses";
 import DashAdmissions from "../Pages/dashboard/Admissions";
 import Users          from "../Pages/dashboard/Users";
+import ManageNews     from "../Pages/dashboard/ManageNews";
+import ManageEvents   from "../Pages/dashboard/ManageEvents";
+import ManageGallery  from "../Pages/dashboard/ManageGallery";
 
 // Student Dashboard
 import StudentLayout from "../Pages/student/StudentLayout";
@@ -65,6 +71,9 @@ const AppRoute = () => {
       <Route path="/admissions" element={<PublicLayout><Admissions /></PublicLayout>} />
       <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
       <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
+      <Route path="/news" element={<PublicLayout><News /></PublicLayout>} />
+      <Route path="/events" element={<PublicLayout><Events /></PublicLayout>} />
+      <Route path="/gallery" element={<PublicLayout><Gallery /></PublicLayout>} />
 
       {/* Protected Admin Dashboard */}
       <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
@@ -73,6 +82,9 @@ const AppRoute = () => {
         <Route path="courses" element={<DashCourses />} />
         <Route path="admissions" element={<DashAdmissions />} />
         <Route path="users" element={<Users />} />
+        <Route path="news" element={<ManageNews />} />
+        <Route path="events" element={<ManageEvents />} />
+        <Route path="gallery" element={<ManageGallery />} />
       </Route>
 
       {/* Protected Student Dashboard */}
