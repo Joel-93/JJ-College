@@ -332,7 +332,7 @@ const Home = () => {
               {news.map(item => (
                 <div key={item._id} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-300 group flex flex-col">
                   <div className="relative overflow-hidden h-44">
-                    <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={e => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=600&q=80'; }} />
+                    <img src={item.image && item.image.startsWith('/uploads') ? `https://jj-college-5poa.onrender.com${item.image}` : item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={e => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=600&q=80'; }} />
                     <div className="absolute top-3 left-3">
                       <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${categoryColors[item.category] || 'bg-slate-100 text-slate-700'}`}>{item.category}</span>
                     </div>
@@ -392,7 +392,7 @@ const Home = () => {
               {events.map(item => (
                 <div key={item._id} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-300 group flex flex-col">
                   <div className="relative overflow-hidden h-44">
-                    <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={e => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=600&q=80'; }} />
+                    <img src={item.image && item.image.startsWith('/uploads') ? `https://jj-college-5poa.onrender.com${item.image}` : item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={e => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=600&q=80'; }} />
                     <div className="absolute top-3 right-3">
                       <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${isUpcoming(item.date) ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}`}>
                         {isUpcoming(item.date) ? 'Upcoming' : 'Completed'}
@@ -448,7 +448,7 @@ const Home = () => {
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {gallery.map(item => (
                 <Link to="/gallery" key={item._id} className="relative rounded-xl overflow-hidden cursor-pointer group h-44 shadow-sm hover:shadow-xl transition-all duration-300 block">
-                  <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onError={e => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80'; }} />
+                  <img src={item.image && item.image.startsWith('/uploads') ? `https://jj-college-5poa.onrender.com${item.image}` : item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onError={e => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80'; }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3">
                     <p className="text-white font-bold text-xs leading-tight">{item.title}</p>
                     <span className={`mt-1 text-[10px] font-bold px-2 py-0.5 rounded-full w-fit ${galleryCategoryColors[item.category] || 'bg-slate-100 text-slate-700'}`}>{item.category}</span>

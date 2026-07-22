@@ -85,7 +85,7 @@ const Events = () => {
             {paginated.map(item => (
               <div key={item._id} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-300 group flex flex-col">
                 <div className="relative overflow-hidden h-48">
-                  <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={e => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=600&q=80'; }} />
+                  <img src={item.image && item.image.startsWith('/uploads') ? `https://jj-college-5poa.onrender.com${item.image}` : item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={e => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=600&q=80'; }} />
                   <div className="absolute top-3 right-3">
                     <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${isUpcoming(item.date) ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}`}>
                       {isUpcoming(item.date) ? 'Upcoming' : 'Completed'}

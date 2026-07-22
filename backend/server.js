@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
+const path = require("path");
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ connectDB();
 
 // Middleware
 app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // CORS Configuration
 const allowedOrigins = [
@@ -46,6 +48,7 @@ const facultyRoutes = require("./routes/facultyRoutes");
 const newsRoutes = require("./routes/newsRoutes");
 const eventRoutes = require("./routes/eventRoutes");
 const galleryRoutes = require("./routes/galleryRoutes");
+const uploadRoutes = require("./routes/uploadRoute");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/contact", contactRoutes);
@@ -55,6 +58,7 @@ app.use("/api/faculty", facultyRoutes);
 app.use("/api/news", newsRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/gallery", galleryRoutes);
+app.use("/api/upload", uploadRoutes);
 
 // Health Check Route
 app.get("/", (req, res) => {

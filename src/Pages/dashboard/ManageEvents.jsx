@@ -17,6 +17,7 @@ const ManageEvents = () => {
   const [search, setSearch] = useState('');
   const [deleteId, setDeleteId] = useState(null);
   const [deleting, setDeleting] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const token = localStorage.getItem('token');
   const authHeader = { Authorization: `Bearer ${token}` };
@@ -32,6 +33,28 @@ const ManageEvents = () => {
   };
 
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(''), 3000); };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const formData = new FormData();
+    formData.append('image', file);
+    setUploadingImage(true);
+    setError('');
+    try {
+      const res = await axios.post(`${API}/upload`, formData, {
+        headers: { ...authHeader, 'Content-Type': 'multipart/form-data' }
+      });
+      if (res.data.success) {
+        setForm(prev => ({ ...prev, image: res.data.url }));
+        showToast('Image uploaded successfully!');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || 'Image upload failed.');
+    } finally {
+      setUploadingImage(false);
+    }
+  };
 
   const openAdd = () => { setForm({ ...EMPTY_FORM, date: new Date().toISOString().split('T')[0] }); setEditItem(null); setError(''); setShowModal(true); };
   const openEdit = (item) => {
@@ -121,7 +144,7 @@ const ManageEvents = () => {
                 {filtered.map(item => (
                   <tr key={item._id} className="hover:bg-slate-50 transition">
                     <td className="px-5 py-3">
-                      <img src={item.image} alt={item.title} className="w-14 h-10 object-cover rounded-lg border border-slate-200" onError={e => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=200&q=60'; }} />
+                      <img src={item.image && item.image.startsWith('/uploads') ? `https://jj-college-5poa.onrender.com${item.image}` : item.image} alt={item.title} className="w-14 h-10 object-cover rounded-lg border border-slate-200" onError={e => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=200&q=60'; }} />
                     </td>
                     <td className="px-5 py-3 font-medium text-slate-900 max-w-xs">
                       <p className="truncate">{item.title}</p>
@@ -172,9 +195,10 @@ const ManageEvents = () => {
                 <textarea rows={3} className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} placeholder="Brief description of the event..." />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1">Banner Image URL *</label>
-                <input className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" value={form.image} onChange={e => setForm({ ...form, image: e.target.value })} placeholder="https://images.unsplash.com/..." />
-                {form.image && <img src={form.image} alt="preview" className="mt-2 h-24 w-full object-cover rounded-lg border border-slate-200" onError={e => e.target.style.display = 'none'} />}
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Upload Banner Image *</label>
+                <input type="file" accept="image/*" onChange={handleImageUpload} className="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" />
+                {uploadingImage && <p className="text-xs text-indigo-600 animate-pulse mt-1">Uploading image...</p>}
+                {form.image && <img src={form.image.startsWith('/uploads') ? `https://jj-college-5poa.onrender.com${form.image}` : form.image} alt="preview" className="mt-2 h-24 w-full object-cover rounded-lg border border-slate-200" onError={e => e.target.style.display = 'none'} />}
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>

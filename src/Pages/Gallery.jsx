@@ -97,7 +97,7 @@ const Gallery = () => {
                 onClick={() => setLightbox(item)}
               >
                 <img
-                  src={item.image}
+                  src={item.image && item.image.startsWith('/uploads') ? `https://jj-college-5poa.onrender.com${item.image}` : item.image}
                   alt={item.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   onError={e => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80'; }}
@@ -137,7 +137,7 @@ const Gallery = () => {
           onClick={() => setLightbox(null)}
         >
           <div className="relative max-w-4xl w-full" onClick={e => e.stopPropagation()}>
-            <img src={lightbox.image} alt={lightbox.title} className="w-full max-h-[80vh] object-contain rounded-xl shadow-2xl" />
+            <img src={lightbox.image && lightbox.image.startsWith('/uploads') ? `https://jj-college-5poa.onrender.com${lightbox.image}` : lightbox.image} alt={lightbox.title} className="w-full max-h-[80vh] object-contain rounded-xl shadow-2xl" />
             <div className="mt-4 flex items-center justify-between">
               <div>
                 <p className="text-white font-bold text-lg">{lightbox.title}</p>

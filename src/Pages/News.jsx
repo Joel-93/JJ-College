@@ -114,7 +114,7 @@ const News = () => {
             {paginated.map(item => (
               <div key={item._id} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-300 group flex flex-col">
                 <div className="relative overflow-hidden h-48">
-                  <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={e => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=600&q=80'; }} />
+                  <img src={item.image && item.image.startsWith('/uploads') ? `https://jj-college-5poa.onrender.com${item.image}` : item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={e => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=600&q=80'; }} />
                   <div className="absolute top-3 left-3">
                     <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${categoryColors[item.category] || 'bg-slate-100 text-slate-700'}`}>{item.category}</span>
                   </div>
