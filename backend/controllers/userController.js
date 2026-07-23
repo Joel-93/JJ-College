@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const { createDummyStudentData, createDummyFacultyData } = require("../utils/dummyDataGenerator");
 
 // Get all users
 exports.getAllUsers = async (req, res) => {
@@ -56,6 +57,13 @@ exports.createUser = async (req, res) => {
       password: hashedPassword,
       role: role || "student",
     });
+
+    // Auto-generate realistic dummy data for newly created student or faculty
+    if (user.role === "student") {
+      await createDummyStudentData(user);
+    } else if (user.role === "faculty") {
+      await createDummyFacultyData(user);
+    }
 
     res.status(201).json({
       success: true,

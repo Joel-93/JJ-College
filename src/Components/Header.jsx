@@ -68,7 +68,7 @@ const Header = () => {
           ) : (
             <Link
               to="/login"
-              className="px-3 py-2 rounded-md text-sm font-medium bg-amber-400 text-indigo-900 hover:bg-amber-300 transition font-bold"
+              className="px-3 py-2 rounded-md text-sm font-medium bg-red-600 text-white hover:bg-red-700 transition font-bold"
             >
               Login
             </Link>
@@ -135,7 +135,7 @@ const Header = () => {
             <Link
               to="/login"
               onClick={() => setMobileOpen(false)}
-              className="block px-3 py-2 rounded-md text-sm bg-amber-400 text-indigo-900 font-bold"
+              className="block px-3 py-2 rounded-md text-sm bg-red-600 text-white font-bold"
             >
               Login
             </Link>

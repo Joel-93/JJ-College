@@ -2,6 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
+const { createDummyStudentData, createDummyFacultyData } = require("../utils/dummyDataGenerator");
 
 // Register
 exports.register = async (req, res) => {
@@ -45,6 +46,12 @@ exports.register = async (req, res) => {
       password: hashedPassword,
       role: role || "student",
     });
+
+    if (user.role === "student") {
+      await createDummyStudentData(user);
+    } else if (user.role === "faculty") {
+      await createDummyFacultyData(user);
+    }
 
     res.status(201).json({
       success: true,

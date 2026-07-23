@@ -1,4 +1,6 @@
 import { useAuth } from '../../context/AuthContext.jsx';
+import { useState, useEffect } from 'react';
+import { getFacultyDashboard } from '../../services/dataService.js';
 import {
   FaChalkboardTeacher,
   FaUsers,
@@ -14,7 +16,27 @@ import {
 
 const FacultyOverview = () => {
   const { user } = useAuth();
-  
+  const [facultyData, setFacultyData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDashboard = async () => {
+      try {
+        const res = await getFacultyDashboard();
+        if (res.success) {
+          setFacultyData(res.data);
+        }
+      } catch (err) {
+        console.error("Error fetching faculty dashboard", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDashboard();
+  }, []);
+
+  const fData = facultyData || {};
+
   // Format name nicely without repeating "Dr."
   const rawName = user?.name || 'Professor';
   let formattedName = rawName;
@@ -22,19 +44,31 @@ const FacultyOverview = () => {
     formattedName = `Dr. ${rawName}`;
   }
 
+  const assigned = fData.classesAssigned && fData.classesAssigned.length > 0
+    ? fData.classesAssigned
+    : [
+        { code: 'CS301', name: 'Data Structures & Algorithms', section: 'CSE-A', year: '3rd Year', students: 62, schedule: 'Mon, Wed, Fri', type: 'Theory', color: 'from-emerald-500 to-teal-500' },
+        { code: 'CS301', name: 'Data Structures & Algorithms', section: 'CSE-B', year: '3rd Year', students: 60, schedule: 'Tue, Thu, Fri', type: 'Theory', color: 'from-sky-500 to-cyan-500' },
+        { code: 'CS301L', name: 'DSA Lab', section: 'CSE-A', year: '3rd Year', students: 62, schedule: 'Monday', type: 'Practical', color: 'from-violet-500 to-purple-500' },
+        { code: 'CS405', name: 'Machine Learning', section: 'AI&DS-A', year: '4th Year', students: 64, schedule: 'Mon, Wed, Thu', type: 'Theory', color: 'from-amber-500 to-orange-500' }
+      ];
+
+  const totalStudentsCount = assigned.reduce((acc, c) => acc + (c.students || 60), 0);
+
   const stats = [
-    { label: 'Classes Today', value: '4', icon: FaChalkboardTeacher, bg: 'bg-emerald-50', accent: 'text-emerald-700' },
-    { label: 'Total Students', value: '186', icon: FaUsers, bg: 'bg-sky-50', accent: 'text-sky-700' },
-    { label: 'Subjects Handled', value: '3', icon: FaBook, bg: 'bg-violet-50', accent: 'text-violet-700' },
+    { label: 'Classes Assigned', value: assigned.length || 4, icon: FaChalkboardTeacher, bg: 'bg-emerald-50', accent: 'text-emerald-700' },
+    { label: 'Total Students', value: totalStudentsCount || 186, icon: FaUsers, bg: 'bg-sky-50', accent: 'text-sky-700' },
+    { label: 'Subjects Handled', value: new Set(assigned.map(c => c.name)).size || 3, icon: FaBook, bg: 'bg-violet-50', accent: 'text-violet-700' },
     { label: 'Avg Attendance', value: '84%', icon: FaChartBar, bg: 'bg-amber-50', accent: 'text-amber-700' },
   ];
 
-  const todayClasses = [
-    { time: '09:00 AM', subject: 'Data Structures & Algorithms', section: 'CSE-A', room: 'Room 301', students: 62 },
-    { time: '10:30 AM', subject: 'Data Structures & Algorithms', section: 'CSE-B', room: 'Room 305', students: 60 },
-    { time: '01:00 PM', subject: 'Machine Learning', section: 'AI&DS-A', room: 'Lab 201', students: 64 },
-    { time: '03:00 PM', subject: 'DSA Lab', section: 'CSE-A', room: 'Lab 301', students: 62 },
-  ];
+  const todayClasses = assigned.map((c, i) => ({
+    time: ['09:00 AM', '10:30 AM', '01:00 PM', '03:00 PM'][i % 4],
+    subject: c.name,
+    section: c.section,
+    room: `Room ${301 + i * 4}`,
+    students: c.students || 60
+  }));
 
   const recentActivity = [
     { action: 'Marked attendance for CSE-A DSA', time: '2 hours ago', icon: FaCheckCircle, color: 'text-emerald-500' },
@@ -50,6 +84,8 @@ const FacultyOverview = () => {
     { name: 'K. Arun', rollNo: 'CSE055', attendance: '70%', subject: 'ML' },
   ];
 
+  if (loading) return <div className="p-8 text-center text-emerald-600 font-medium">Loading Dashboard...</div>;
+
   return (
     <div className="space-y-6 w-full">
       {/* Welcome Banner */}
@@ -59,11 +95,11 @@ const FacultyOverview = () => {
         <div className="relative z-10">
           <p className="text-emerald-100 text-sm font-medium">Good Morning</p>
           <h2 className="text-2xl sm:text-3xl font-bold mt-1">{formattedName}!</h2>
-          <p className="text-emerald-100 text-sm mt-2 max-w-lg">You have 4 classes scheduled today. 3 students need attendance warnings.</p>
+          <p className="text-emerald-100 text-sm mt-2 max-w-lg">You have {todayClasses.length} classes scheduled today. 3 students need attendance warnings.</p>
           <div className="flex flex-wrap gap-3 mt-4">
-            <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold">Dept. of CSE</span>
-            <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold">Asst. Professor</span>
-            <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold hidden sm:inline">ID: JJEC/FAC/CSE/012</span>
+            <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold">{fData.department || 'Dept. of CSE'}</span>
+            <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold">{fData.designation || 'Asst. Professor'}</span>
+            <span className="bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold hidden sm:inline">ID: {fData.employeeId || 'JJEC/FAC/CSE/012'}</span>
           </div>
         </div>
       </div>
@@ -91,7 +127,7 @@ const FacultyOverview = () => {
             <h3 className="font-bold text-slate-800 flex items-center gap-2">
               <FaChalkboardTeacher className="text-emerald-600" /> Today's Classes
             </h3>
-            <span className="text-xs text-emerald-600 font-semibold">Monday, Jul 21</span>
+            <span className="text-xs text-emerald-600 font-semibold">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}</span>
           </div>
           <div className="divide-y divide-slate-50">
             {todayClasses.map((c, i) => (
